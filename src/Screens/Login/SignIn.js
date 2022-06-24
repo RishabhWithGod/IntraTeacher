@@ -64,17 +64,17 @@ const SignIn = props => {
         })
         .then(result => {
           if (result.status == true) {
-            // console.log(result.data)
-            let userinfo = result.data;
+            // console.log(result.data.teacher_data[0].user_id)
+            let userinfo = result.data.teacher_data[0];
             dispatch(setuserInfo(userinfo));
             // dispatch(setuserName(username.e_name));
-            AsyncStorage.setItem('user_id', result.data.id);
-            AsyncStorage.setItem('user_name', result.data.username);
-            AsyncStorage.setItem('school_id', result.data.school_id);
-            // AsyncStorage.setItem('user_email', result.data.e_email);
+            AsyncStorage.setItem('user_id', result.data.teacher_data[0].user_id);
+            AsyncStorage.setItem('user_name', result.data.teacher_data[0].name);
+            AsyncStorage.setItem('school_id', result.data.teacher_data[0].school_id);
+            AsyncStorage.setItem('user_email', result.data.teacher_data[0].email);
             // AsyncStorage.setItem('user_image', result.data.profile_picture);
             // dispatch(setuserName(username));
-            // console.log('userID =>' + JSON.stringify(result.data.username));
+            // console.log('userID =>' + JSON.stringify(result.data.teacher_data[0].id));
             setLoading(false);
             alert(result.message);
             props.navigation.navigate('Home');

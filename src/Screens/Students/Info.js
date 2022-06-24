@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -24,7 +24,20 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-crop-picker';
 
 const Info = () => {
-  const [selectedimage, setSelectedImage] = useState('');
+  const [student, setStudent] = useState({
+    image: '',
+    name: '',
+    mobileno: '',
+    email: '',
+    fathername: '',
+    fathermobileno: '',
+    fatheremail: '',
+    mothername: '',
+    mothermobileno: '',
+    motheremail: '',
+    Address: '',
+  });
+
   //   -----------------DropDownPicker------------
   DropDownPicker.setListMode('SCROLLVIEW');
   const [open, setOpen] = useState(false);
@@ -106,10 +119,10 @@ const Info = () => {
     ImagePicker.openPicker({
       width: 250,
       height: 250,
-      cropping: true, 
+      cropping: true,
     }).then(image => {
       console.log(image);
-      setSelectedImage(image.path);
+      setStudent({image: image.path});
     });
 
     // -----------------For Camera------------------------
@@ -122,6 +135,7 @@ const Info = () => {
     //   setSelectedImage(image.path);
     // });
   };
+
   return (
     <View style={styles.container}>
       <View
@@ -157,14 +171,10 @@ const Info = () => {
               paddingHorizontal: 20,
             }}
             onPress={SelectImage}>
-            {selectedimage == '' ? (
-              <FontAwesome5
-                name="user-alt"
-                size={20}
-                color="#000000"
-              />
+            {student.image == '' ? (
+              <FontAwesome5 name="user-alt" size={20} color="#000000" />
             ) : (
-              <Avatar.Image size={50} source={{uri: selectedimage}} />
+              <Avatar.Image size={50} source={{uri: student.image}} />
             )}
             <Text style={styles.label}>Add Profile Picture</Text>
           </TouchableOpacity>
@@ -174,6 +184,10 @@ const Info = () => {
             <TextInput
               placeholder="ENTER NAME"
               placeholderTextColor="#808080"
+              value={student.name}
+              onChangeText={value => {
+                setStudent({name: value});
+              }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
@@ -188,6 +202,10 @@ const Info = () => {
             <TextInput
               placeholder="ENTER MOBILE NUMBER"
               placeholderTextColor="#808080"
+              value={student.mobileno}
+              onChangeText={value => {
+                setStudent({mobileno: value});
+              }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
@@ -202,6 +220,10 @@ const Info = () => {
             <TextInput
               placeholder="EMAIL ID HERE"
               placeholderTextColor="#808080"
+              value={student.email}
+              onChangeText={value => {
+                setStudent({email: value});
+              }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
@@ -305,6 +327,10 @@ const Info = () => {
             <TextInput
               placeholder="ENTER NAME"
               placeholderTextColor="#808080"
+              value={student.fathername}
+              onChangeText={value => {
+                setStudent({fathername: value});
+              }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
@@ -319,6 +345,10 @@ const Info = () => {
             <TextInput
               placeholder="ENTER MOBILE NUMBER"
               placeholderTextColor="#808080"
+              value={student.fathermobileno}
+              onChangeText={value => {
+                setStudent({fathermobileno: value});
+              }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
@@ -333,6 +363,10 @@ const Info = () => {
             <TextInput
               placeholder="ENTER EMAIL ID HERE"
               placeholderTextColor="#808080"
+              value={student.fatheremail}
+              onChangeText={value => {
+                setStudent({fatheremail: value});
+              }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
@@ -347,6 +381,10 @@ const Info = () => {
             <TextInput
               placeholder="ENTER NAME"
               placeholderTextColor="#808080"
+              value={student.mothername}
+              onChangeText={value => {
+                setStudent({mothername: value});
+              }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
@@ -361,6 +399,10 @@ const Info = () => {
             <TextInput
               placeholder="ENTER MOBILE NUMBER"
               placeholderTextColor="#808080"
+              value={student.mothermobileno}
+              onChangeText={value => {
+                setStudent({mothermobileno: value});
+              }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
@@ -375,6 +417,10 @@ const Info = () => {
             <TextInput
               placeholder="ENTER EMAIL HERE"
               placeholderTextColor="#808080"
+              value={student.motheremail}
+              onChangeText={value => {
+                setStudent({motheremail: value});
+              }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',
@@ -389,6 +435,10 @@ const Info = () => {
             <TextInput
               placeholder="Parmanent Add"
               placeholderTextColor="#808080"
+              value={student.Address}
+              onChangeText={value => {
+                setStudent({Address: value});
+              }}
               style={{
                 marginLeft: 2,
                 backgroundColor: '#FFFFFF',

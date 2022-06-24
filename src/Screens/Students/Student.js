@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   RefreshControl,
+  ImageBackground,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -51,26 +52,25 @@ const Student = props => {
     setRefreshing(false);
     setLoading(true);
     try {
+      const formData = new FormData();
+      formData.append('school_id', schoolid);
+      formData.append('teacher_id', userid);
       let resp = await fetch(`${Url.studentList}`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
-       body: JSON.stringify({
-        school_id: schoolid,
-        teacher_id: userid,
-        }),
+        body: formData,
       })
         .then(response => {
           // console.log('DATA' + JSON.stringify(response));
           return response.json();
         })
         .then(result => {
-          console.log(result);
+          // console.log(result);
           setGetdata(result.data);
           setLoading(false);
-          
         });
     } catch (error) {
       console.log('Student List Error => ' + error);
@@ -136,11 +136,29 @@ const Student = props => {
               <DataTable>
                 <DataTable.Row style={{borderBottomWidth: 0}}>
                   <DataTable.Cell>
-                    <Avatar.Image
-                      source={{}}
-                      size={50}
-                      style={{backgroundColor: '#000000'}}
-                    />
+                    {student.photo == null ? (
+                      <ImageBackground
+                        style={{
+                          backgroundColor: COLORS.black,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: 40,
+                          height: 40,
+                          borderRadius: 20, 
+                        }}>
+                        <FontAwesome5
+                          name="user-alt"
+                          size={20}
+                          color="#FFFFFF"
+                        />
+                      </ImageBackground>
+                    ) : (
+                      <Avatar.Image
+                        size={50}
+                        source={student.photo}
+                        backgroundColor={COLORS.black}
+                      />
+                    )}
                   </DataTable.Cell>
                   <DataTable.Cell style={{flex: 4.5}}>
                     <Text style={styles.label}>{student.name}</Text>

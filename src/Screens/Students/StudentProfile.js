@@ -15,10 +15,13 @@ import {container, paraGray} from '../../theme/styles/Base';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {useSelector, useDispatch} from 'react-redux';
 
 const StudentProfile = props => {
   const {student} = props.route.params;
-
+  const {userinfo, userid, username, showmodal} = useSelector(
+    state => state.userReducer,
+  );
   useEffect(() => {
     //  console.log("us"+JSON.stringify(student))
   }, []);
@@ -46,7 +49,7 @@ const StudentProfile = props => {
           }}>
           <TouchableOpacity
             style={{backgroundColor: COLORS.section, borderRadius: 20}}
-            onPress={() => props.navigation.navigate('TabScreen')}>
+            onPress={() => props.navigation.navigate('Info')}>
             <FontAwesome
               style={{marginVertical: 5, marginHorizontal: 7}}
               name="pencil"
@@ -94,10 +97,10 @@ const StudentProfile = props => {
               />
               <View style={{marginLeft: 10}}>
                 <Text style={[paraGray.parahome, {fontSize: 15}]}>
-                  {student.s_username}
+                  {student.name}
                 </Text>
                 <Text style={[paraGray.darkpara, {color: COLORS.lightblack}]}>
-                  Class XI-B | Roll no: 04
+                  Class XI-B | Roll no: {student.roll_no}
                 </Text>
               </View>
               <TouchableOpacity
@@ -154,7 +157,7 @@ const StudentProfile = props => {
                 <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
                   Academic Year
                 </Text>
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{flex: 1, flexDirection: 'row',}}>
                   <Text
                     style={[
                       paraGray.darklarge,
@@ -193,11 +196,12 @@ const StudentProfile = props => {
                   heigth: 150,
                   backgroundColor: 'white',
                   // paddingHorizontal: 10,
+                  
                 }}>
                 <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
                   Admission Class
                 </Text>
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{flex: 1, flexDirection: 'row',alignItems:'center'}}>
                   <Text
                     style={[
                       paraGray.darklarge,
@@ -229,9 +233,9 @@ const StudentProfile = props => {
                   marginLeft: 10,
                 }}>
                 <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
-                  Old Admission No
+                  Old School Name
                 </Text>
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{flex: 1, flexDirection: 'row',alignItems:'center'}}>
                   <Text
                     style={[
                       paraGray.darklarge,
@@ -241,7 +245,7 @@ const StudentProfile = props => {
                         width: '80%',
                       },
                     ]}>
-                    T00221
+                    {student.previous_school}
                   </Text>
                   <View
                     style={{
@@ -273,7 +277,7 @@ const StudentProfile = props => {
                 <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
                   Date of Admission
                 </Text>
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{flex: 1, flexDirection: 'row',alignItems:'center'}}>
                   <Text
                     style={[
                       paraGray.darklarge,
@@ -283,7 +287,7 @@ const StudentProfile = props => {
                         width: '80%',
                       },
                     ]}>
-                    01 Apr 2018
+                    {student.admission_date}
                   </Text>
                   <View
                     style={{
@@ -317,7 +321,7 @@ const StudentProfile = props => {
                         width: '80%',
                       },
                     ]}>
-                    22 July 1996
+                    {student.dob}
                   </Text>
                   <View
                     style={{
@@ -349,7 +353,7 @@ const StudentProfile = props => {
                 <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
                   Student Mobile NO
                 </Text>
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{flex: 1, flexDirection: 'row',alignItems:'center'}}>
                   <Text
                     style={[
                       paraGray.darklarge,
@@ -357,9 +361,10 @@ const StudentProfile = props => {
                         borderBottomColor: COLORS.bottom,
                         borderBottomWidth: 1,
                         width: '80%',
+
                       },
                     ]}>
-                    +91-90821114
+                    {student.phone}
                   </Text>
                   <View
                     style={{
@@ -393,7 +398,7 @@ const StudentProfile = props => {
                         width: '80%',
                       },
                     ]}>
-                    admin@intra
+                    {student.email}
                   </Text>
                   <View
                     style={{
@@ -511,7 +516,7 @@ const StudentProfile = props => {
                         width: '80%',
                       },
                     ]}>
-                    Simran
+                    {username}
                   </Text>
                   <View
                     style={{
@@ -612,7 +617,7 @@ const StudentProfile = props => {
                       width: '90%',
                     },
                   ]}>
-                  Vikas Gupta
+                  {student.mother_name}
                 </Text>
                 <View
                   style={{
@@ -645,7 +650,7 @@ const StudentProfile = props => {
                       width: '90%',
                     },
                   ]}>
-                  Vikas Gupta
+                  {student.father_name}
                 </Text>
                 <View
                   style={{
@@ -680,7 +685,7 @@ const StudentProfile = props => {
                       width: '90%',
                     },
                   ]}>
-                  Manorama Nagar, Thane-W
+                  {student.permanent_address}
                 </Text>
                 <View
                   style={{
@@ -715,7 +720,7 @@ const StudentProfile = props => {
                       width: '90%',
                     },
                   ]}>
-                  9876543210
+                  {student.father_phone}
                 </Text>
                 <View
                   style={{

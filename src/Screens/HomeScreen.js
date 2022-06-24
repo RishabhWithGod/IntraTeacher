@@ -72,12 +72,12 @@ const HomeScreen = props => {
       const user_Id = await AsyncStorage.getItem('user_id');
       const user_name = await AsyncStorage.getItem('user_name');
       const school_id = await AsyncStorage.getItem('school_id');
-      // const user_email = await AsyncStorage.getItem('user_email');
+      const user_email = await AsyncStorage.getItem('user_email');
       // const user_image = await AsyncStorage.getItem('user_image');
       dispatch(setuserId(user_Id));
       dispatch(setuserName(user_name));
       dispatch(setschoolId(school_id))
-      // dispatch(setuserEmail(user_email));
+      dispatch(setuserEmail(user_email));
       // dispatch(setuserImage(user_image));
       // console.log("first"+school_id) 
       setLoading(false);
