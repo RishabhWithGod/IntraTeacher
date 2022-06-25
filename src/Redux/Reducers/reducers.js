@@ -8,6 +8,7 @@ import {
   SET_CHECKED,
   SET_USER_IMAGE,
   SET_SCHOOL_ID,
+  SET_VALUE,
 } from '../Actions/actions';
 
 const initialState = {
@@ -16,10 +17,11 @@ const initialState = {
   username: '',
   useremail: '',
   userimage:'',
-  userinfo: [],
+  userinfo: '',
   showprofile: false,
   showmodal: false,
-  checked:''
+  checked:'',
+  value:null,
 };
 
 function userReducer(state = initialState, action) {
@@ -42,6 +44,8 @@ function userReducer(state = initialState, action) {
       return {...state, showmodal: action.payload};
       case SET_CHECKED:
         return {...state, checked: action.payload};
+        case SET_VALUE:
+          return {...state, value: action.payload};
     default:
       return state;
   }

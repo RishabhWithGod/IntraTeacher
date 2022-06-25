@@ -14,6 +14,7 @@ import {COLORS} from '../../theme/Colors';
 import {container, paraGray} from '../../theme/styles/Base';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useSelector, useDispatch} from 'react-redux';
 
@@ -91,10 +92,25 @@ const StudentProfile = props => {
                 marginTop: 10,
                 marginBottom: 10,
               }}>
-              <Avatar.Image
-                size={70}
-                source={require('../../../assets/image5.png')}
-              />
+              {student.photo == null ? (
+                <ImageBackground
+                  style={{
+                    backgroundColor: COLORS.black,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: 50,
+                    height: 50,
+                    borderRadius: 30,
+                  }}>
+                  <FontAwesome5 name="user-alt" size={25} color="#FFFFFF" />
+                </ImageBackground>
+              ) : (
+                <Avatar.Image
+                  size={70}
+                  source={student.photo}
+                  backgroundColor={COLORS.black}
+                />
+              )}
               <View style={{marginLeft: 10}}>
                 <Text style={[paraGray.parahome, {fontSize: 15}]}>
                   {student.name}
@@ -157,7 +173,7 @@ const StudentProfile = props => {
                 <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
                   Academic Year
                 </Text>
-                <View style={{flex: 1, flexDirection: 'row',}}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
                   <Text
                     style={[
                       paraGray.darklarge,
@@ -196,12 +212,12 @@ const StudentProfile = props => {
                   heigth: 150,
                   backgroundColor: 'white',
                   // paddingHorizontal: 10,
-                  
                 }}>
                 <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
                   Admission Class
                 </Text>
-                <View style={{flex: 1, flexDirection: 'row',alignItems:'center'}}>
+                <View
+                  style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                   <Text
                     style={[
                       paraGray.darklarge,
@@ -235,7 +251,8 @@ const StudentProfile = props => {
                 <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
                   Old School Name
                 </Text>
-                <View style={{flex: 1, flexDirection: 'row',alignItems:'center'}}>
+                <View
+                  style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                   <Text
                     style={[
                       paraGray.darklarge,
@@ -277,7 +294,8 @@ const StudentProfile = props => {
                 <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
                   Date of Admission
                 </Text>
-                <View style={{flex: 1, flexDirection: 'row',alignItems:'center'}}>
+                <View
+                  style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                   <Text
                     style={[
                       paraGray.darklarge,
@@ -353,7 +371,8 @@ const StudentProfile = props => {
                 <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
                   Student Mobile NO
                 </Text>
-                <View style={{flex: 1, flexDirection: 'row',alignItems:'center'}}>
+                <View
+                  style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                   <Text
                     style={[
                       paraGray.darklarge,
@@ -361,7 +380,6 @@ const StudentProfile = props => {
                         borderBottomColor: COLORS.bottom,
                         borderBottomWidth: 1,
                         width: '80%',
-
                       },
                     ]}>
                     {student.phone}

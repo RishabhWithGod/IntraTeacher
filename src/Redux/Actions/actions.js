@@ -7,6 +7,7 @@ export const SET_USER_INFO = 'SET_USER_INFO';
 export const SET_SHOW_PROFILE = 'SET_SHOW_PROFILE';
 export const SET_SHOW_MODAL = 'SET_SHOW_MODAL';
 export const SET_CHECKED = 'SET_CHECKED';
+export const SET_VALUE = 'SET_VALUE';
 
 
 export const setuserId = userid => dispatch => {
@@ -66,5 +67,11 @@ export const setChecked = checked => dispatch => {
   dispatch({
     type: SET_CHECKED,
     payload: checked,
+  });
+};
+export const setValue = value => dispatch => {
+  dispatch({
+    type: SET_VALUE,
+    payload: value,  
   });
 };

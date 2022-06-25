@@ -76,10 +76,10 @@ const HomeScreen = props => {
       // const user_image = await AsyncStorage.getItem('user_image');
       dispatch(setuserId(user_Id));
       dispatch(setuserName(user_name));
-      dispatch(setschoolId(school_id))
+      dispatch(setschoolId(school_id));
       dispatch(setuserEmail(user_email));
       // dispatch(setuserImage(user_image));
-      // console.log("first"+school_id) 
+      // console.log("first"+school_id)
       setLoading(false);
     } catch (error) {
       console.log('Catch' + error);
@@ -362,7 +362,7 @@ const HomeScreen = props => {
         contentContainerStyle={{
           width: '75%',
           height: 250,
-          backgroundColor: 'white',
+          backgroundColor: COLORS.bg,
           alignSelf: 'center',
           padding: 15,
           borderRadius: 5,
