@@ -81,7 +81,7 @@ const AttendancePtm = props => {
 
   return (
     <View style={styles.container}>
-      {loading == true && <Spinner visible={load} />}
+      {loading == true && <Spinner visible={load}/>}
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
