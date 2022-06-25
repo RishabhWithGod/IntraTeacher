@@ -87,7 +87,7 @@ const AttendancePtm = props => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        {/* <View style={{marginTop: 30}}>
+        <View style={{marginTop: 30}}>
           <Text style={styles.labeltxt}>Stream</Text>
           <DropDownPicker
             open={open}
@@ -125,7 +125,7 @@ const AttendancePtm = props => {
               borderColor: '#E5E5E5',
             }}
           />
-        </View> */}
+        </View>
         <View>
           <Text style={styles.labeltxt}>Class </Text>
           <DropDownPicker
