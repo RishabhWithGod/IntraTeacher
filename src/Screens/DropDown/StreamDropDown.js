@@ -75,10 +75,10 @@ const StreamDropDown = () => {
         value={value}
         items={getdata.map(item => ({label: item.name, value: item.name}))}
         setOpen={setOpen}
-        // setValue={dispatch(setValue(value))}
-        onChangeValue={(value) => {
-          (console.log(value))
-        }}
+        setValue={setValue}
+        // onChangeValue={({value}) => {
+        //   (setValue(value),console.log(value))
+        // }}
         // setItems={console.log('Selected Stream => ' + value)}
         placeholder="Select Stream"
         multiple={false}

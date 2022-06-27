@@ -25,15 +25,17 @@ const AttendancePtm = props => {
   DropDownPicker.setListMode('SCROLLVIEW');
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [opens, setOpens] = useState(false);
-  const [values, setValues] = useState(null);
   const [classopen, setClassOpen] = useState(false);
   const [classvalue, setClassValue] = useState(null);
-
+  const [sectionopen, setSectionOpen] = useState(false);
+  const [sectionvalue, setSectionValue] = useState(null);
+  const [subjectopen, setSubjectOpen] = useState(false);
+  const [subjectvalue, setSubjectValue] = useState(null);
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
   const [getdata, setGetdata] = useState([]);
+  const [getsubdata, setGetsubdata] = useState([]);
   const {userinfo, userid, username, showmodal, schoolid} = useSelector(
     state => state.userReducer,
   );
@@ -65,8 +67,41 @@ const AttendancePtm = props => {
           return response.json();
         })
         .then(result => {
-          console.log(result);
+          // console.log(result);
           setGetdata(result.data);
+          setLoading(false);
+        });
+    } catch (error) {
+      console.log('AttendancePtm Error => ' + error);
+      setLoading(false);
+    }
+  };
+
+  
+  const getapiDatas = async () => {
+    // console.log("first"+classvalue)
+    // setRefreshing(false);
+    // setLoading(true);
+    try {
+      const formData = new FormData();
+      // formData.append('school_id', schoolid);
+      formData.append('teacher_id', userid);
+      formData.append('class_id', classvalue);
+      let resp = await fetch(`${Url.get_subject_classID}`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+        body: formData,
+      })
+        .then(response => {
+          // console.log('DATA' + JSON.stringify(response));
+          return response.json();
+        })
+        .then(result => {
+          // console.log(result);
+          setGetsubdata(result.data);
           setLoading(false);
         });
     } catch (error) {
@@ -81,18 +116,21 @@ const AttendancePtm = props => {
 
   return (
     <View style={styles.container}>
-      {loading == true && <Spinner visible={load}/>}
+      {loading == true && <Spinner visible={load} />}
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <View style={{marginTop: 30}}>
+        <View style={{marginTop: 10}}>
           <Text style={styles.labeltxt}>Stream</Text>
           <DropDownPicker
             open={open}
             value={value}
-            items={getdata.map(item => ({label: item.name, value: item.name}))}
+            items={getdata.map(item => ({
+              label: item.class_name,
+              value: item.class_name,
+            }))}
             setOpen={setOpen}
             setValue={setValue}
             // onChangeValue={value => {
@@ -127,7 +165,7 @@ const AttendancePtm = props => {
           />
         </View>
         <View>
-          <Text style={styles.labeltxt}>Class </Text>
+          <Text style={styles.labeltxt}>Class</Text>
           <DropDownPicker
             open={classopen}
             value={classvalue}
@@ -137,7 +175,9 @@ const AttendancePtm = props => {
             }))}
             setOpen={setClassOpen}
             setValue={setClassValue}
-            // setItems={console.log('Selected Subject => ' + values)}
+            // setItems={getapiDatas}
+            onChangeValue={getapiDatas}
+            // setItems={console.log('Selected Subject => ' + classvalue)}
             placeholder="Select Class"
             multiple={false}
             min={0}
@@ -166,13 +206,52 @@ const AttendancePtm = props => {
           />
         </View>
         <View>
-          <Text style={styles.labeltxt}>Subject </Text>
+          <Text style={styles.labeltxt}>Section</Text>
           <DropDownPicker
-            open={opens}
-            value={values}
-            items={getdata.map(item => ({label: item.name, value: item.name}))}
-            setOpen={setOpens}
-            setValue={setValues}
+            open={sectionopen}
+            value={sectionvalue}
+            items={getdata.map(item => ({
+              label: item.numeric_name,
+              value: item.numeric_name,
+            }))}
+            setOpen={setSectionOpen}
+            setValue={setSectionValue}
+            // setItems={console.log('Selected Subject => ' + values)}
+            placeholder="Select Section"
+            multiple={false}
+            min={0}
+            max={5}
+            searchable={true}
+            // autoScroll={true}
+            // dropDownDirection="TOP"
+            style={{
+              width: '90%',
+              alignSelf: 'center',
+              backgroundColor: '#E5E5E5',
+              borderColor: '#E5E5E5',
+              marginTop: 10,
+              zIndex: classopen != false ? 0 : 1,
+            }}
+            textStyle={{
+              fontSize: 13,
+              fontFamily: 'Montserrat-Regular',
+            }}
+            dropDownContainerStyle={{
+              width: '90%',
+              alignSelf: 'center',
+              backgroundColor: '#E5E5E5',
+              borderColor: '#E5E5E5',
+            }}
+          />
+        </View>
+        <View>
+          <Text style={styles.labeltxt}>Subject</Text>
+          <DropDownPicker
+            open={subjectopen}
+            value={subjectvalue}
+            items={getsubdata.map(item => ({label: item.name, value: item.name}))}
+            setOpen={setSubjectOpen}
+            setValue={setSubjectValue}
             // setItems={console.log('Selected Subject => ' + values)}
             placeholder="Select Subject"
             multiple={false}
@@ -221,7 +300,8 @@ const AttendancePtm = props => {
               props.navigation.navigate('TakeAttendance', {
                 streamvalue: value,
                 classvalue: classvalue,
-                subjectvalue: values,
+                sectionvalue: sectionvalue,
+                subjectvalue: subjectvalue,
               });
             }}>
             <Text

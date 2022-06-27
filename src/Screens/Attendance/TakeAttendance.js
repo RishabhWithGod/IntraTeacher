@@ -22,8 +22,9 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {COLORS} from '../../theme/Colors';
 import {paraGray} from '../../theme/styles/Base';
 
-const TakeAttendance = (props) => {
-  const {streamvalue, subjectvalue,classvalue} = props.route.params;
+const TakeAttendance = props => {
+  const {streamvalue, subjectvalue, classvalue, sectionvalue} =
+    props.route.params;
   const dispatch = useDispatch();
   const {userinfo, userid, username, showmodal, schoolid} = useSelector(
     state => state.userReducer,
@@ -41,7 +42,7 @@ const TakeAttendance = (props) => {
 
   useEffect(() => {
     getapiData();
-    // console.log("data "+subjectvalue)
+    console.log('data ' + sectionvalue);
   }, []);
 
   // --------APICall----------
@@ -92,6 +93,12 @@ const TakeAttendance = (props) => {
         <View style={styles.rowcontainer}>
           <View
             style={{
+              // flex: 1,
+            }}>
+            <Text style={styles.rowTxt}>Present</Text>
+          </View>
+          <View
+            style={{
               flex: 1,
               justifyContent: 'center',
               marginRight: 20,
@@ -102,22 +109,16 @@ const TakeAttendance = (props) => {
           </View>
           <View
             style={{
-              flex: 1,
-            }}>
-            <Text style={styles.rowTxt}>Present</Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
+              // flex: 1,
             }}>
             <Text style={styles.rowTxt}>Absent</Text>
           </View>
-          <View
+          {/* <View
             style={{
               flex: 1,
             }}>
             <Text style={styles.rowTxt}>Late</Text>
-          </View>
+          </View> */}
         </View>
 
         {getdata.map((user, index) => (
@@ -125,15 +126,7 @@ const TakeAttendance = (props) => {
             <View style={styles.radio}>
               <View
                 style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={styles.datatxt}>{user.name}</Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
+                  // flex: 1,
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
@@ -151,6 +144,14 @@ const TakeAttendance = (props) => {
               <View
                 style={{
                   flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text style={styles.datatxt}>{user.name}</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
@@ -164,7 +165,7 @@ const TakeAttendance = (props) => {
                   // onChange={handleChange}
                 />
               </View>
-              <View
+              {/* <View
                 style={{
                   flex: 1,
                   alignItems: 'center',
@@ -179,7 +180,7 @@ const TakeAttendance = (props) => {
                   // onPress={() =>{  setStateusers(user.checked='second');console.log(user.checked);} }
                   // onChange={handleChange}
                 />
-              </View>
+              </View> */}
             </View>
           </View>
         ))}
