@@ -10,6 +10,7 @@ import {
   RefreshControl,
   ScrollView,
 } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -20,29 +21,34 @@ import {useSelector, useDispatch} from 'react-redux';
 import Url from '../../Api/Url';
 import {COLORS} from '../../theme/Colors';
 import Spinner from 'react-native-loading-spinner-overlay';
+import RNSearchablePicker from 'react-native-searchable-picker';
+import {Dropdown} from 'react-native-element-dropdown';
 
 const AttendancePtm = props => {
   DropDownPicker.setListMode('SCROLLVIEW');
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [classopen, setClassOpen] = useState(false);
   const [classvalue, setClassValue] = useState(null);
-  const [sectionopen, setSectionOpen] = useState(false);
   const [sectionvalue, setSectionValue] = useState(null);
-  const [subjectopen, setSubjectOpen] = useState(false);
+  const [value, setValue] = useState(null);
   const [subjectvalue, setSubjectValue] = useState(null);
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
   const [getdata, setGetdata] = useState([]);
   const [getsubdata, setGetsubdata] = useState([]);
-  const {userinfo, userid, username, showmodal, schoolid} = useSelector(
-    state => state.userReducer,
-  );
+  const [getsectiondata, setGetsectiondata] = useState([]);
+  const {userinfo, userid, username, showmodal, schoolid, teacherid} =
+    useSelector(state => state.userReducer);
+  const [selected, setSelected] = useState();
+  const [isFocus, setIsFocus] = useState(false);
+  const [issectionFocus, setIssectionFocus] = useState(false);
+  const [issubjectFocus, setIssubjectFocus] = useState(false);
+  
   useEffect(() => {
     getapiData();
+   
+    // console.log(date);
     // console.log("Tid"+schoolid)
-    // console.log("Uid"+userid)
+    // console.log('Uid' + teacherid);
   }, []);
 
   // --------APICall----------
@@ -53,8 +59,9 @@ const AttendancePtm = props => {
     try {
       const formData = new FormData();
       // formData.append('school_id', schoolid);
-      formData.append('teacher_id', userid);
-      let resp = await fetch(`${Url.getclass}`, {
+      formData.append('teacher_id', teacherid);
+
+      let resp = await fetch(`${Url.get_all_class}`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -69,6 +76,7 @@ const AttendancePtm = props => {
         .then(result => {
           // console.log(result);
           setGetdata(result.data);
+          // console.log('hi' + result.data);
           setLoading(false);
         });
     } catch (error) {
@@ -76,17 +84,50 @@ const AttendancePtm = props => {
       setLoading(false);
     }
   };
+  const getsectionData = async item => {
+    // setValue(item);
 
-  
-  const getapiDatas = async () => {
-    // console.log("first"+classvalue)
+    // console.log('first' + JSON.stringify(value));
+    // getsectionData();
+    // setRefreshing(false);
+    // setLoading(true);
+    try {
+      const formData = new FormData();
+      // formData.append('school_id', schoolid);
+      formData.append('teacher_id', teacherid);
+      formData.append('class_id', item.value);
+      let resp = await fetch(`${Url.get_section_classId}`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+        body: formData,
+      })
+        .then(response => {
+          // console.log('DATA' + JSON.stringify(response));
+          return response.json();
+        })
+        .then(result => {
+          // console.log(result);
+          setGetsectiondata(result.data);
+          setLoading(false);
+        });
+    } catch (error) {
+      console.log('AttendancePtm Error => ' + error);
+      setLoading(false);
+    }
+  };
+  const getsubjectData = async item => {
+    // setSectionValue(item.value);
+    // console.log('firstS' + sectionvalue);
     // setRefreshing(false);
     // setLoading(true);
     try {
       const formData = new FormData();
       // formData.append('school_id', schoolid);
       formData.append('teacher_id', userid);
-      formData.append('class_id', classvalue);
+      formData.append('class_id', item.value);
       let resp = await fetch(`${Url.get_subject_classID}`, {
         method: 'POST',
         headers: {
@@ -122,161 +163,110 @@ const AttendancePtm = props => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <View style={{marginTop: 10}}>
-          <Text style={styles.labeltxt}>Stream</Text>
-          <DropDownPicker
-            open={open}
-            value={value}
-            items={getdata.map(item => ({
-              label: item.class_name,
-              value: item.class_name,
-            }))}
-            setOpen={setOpen}
-            setValue={setValue}
-            // onChangeValue={value => {
-            //   console.log(value);
-            // }}
-            // setItems={console.log('Selected Stream => ' + value)}
-            placeholder="Select Stream"
-            multiple={false}
-            min={0}
-            max={5}
-            searchable={true}
-            // autoScroll={true}
-            // dropDownDirection="TOP"
-            style={{
-              width: '90%',
-              alignSelf: 'center',
-              backgroundColor: '#E5E5E5',
-              borderColor: '#E5E5E5',
-              marginTop: 10,
-              zIndex: 1,
-            }}
-            textStyle={{
-              fontSize: 13,
-              fontFamily: 'Montserrat-Regular',
-            }}
-            dropDownContainerStyle={{
-              width: '90%',
-              alignSelf: 'center',
-              backgroundColor: '#E5E5E5',
-              borderColor: '#E5E5E5',
-            }}
-          />
-        </View>
-        <View>
+        <View style={{marginTop: 20, paddingHorizontal: 15}}>
           <Text style={styles.labeltxt}>Class</Text>
-          <DropDownPicker
-            open={classopen}
+          <Dropdown
+            style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            inputSearchStyle={styles.inputSearchStyle}
+            iconStyle={styles.iconStyle}
+            data={getdata.map(item => ({
+              label: item.class_name,
+              value: item.class_id,
+            }))}
+            search
+            containerStyle={{
+              backgroundColor: '#E5E5E5',
+              borderColor: '#E5E5E5',
+            }}
+            fontFamily={'Montserrat-Regular'}
+            maxHeight={300}
+            labelField="label"
+            valueField="value"
+            placeholder={!isFocus ? 'Select item' : '...'}
+            searchPlaceholder="Search..."
             value={classvalue}
-            items={getdata.map(item => ({
-              label: item.numeric_name,
-              value: item.numeric_name,
-            }))}
-            setOpen={setClassOpen}
-            setValue={setClassValue}
-            // setItems={getapiDatas}
-            onChangeValue={getapiDatas}
-            // setItems={console.log('Selected Subject => ' + classvalue)}
-            placeholder="Select Class"
-            multiple={false}
-            min={0}
-            max={5}
-            searchable={true}
-            // autoScroll={true}
-            // dropDownDirection="TOP"
-            style={{
-              width: '90%',
-              alignSelf: 'center',
-              backgroundColor: '#E5E5E5',
-              borderColor: '#E5E5E5',
-              marginTop: 10,
-              zIndex: open != false ? 0 : 1,
+            onFocus={() => setIsFocus(true)}
+            onBlur={() => setIsFocus(false)}
+            onChange={item => {
+              setClassValue(item.value);
+              setIsFocus(false);
+              getsectionData(item);
             }}
-            textStyle={{
-              fontSize: 13,
-              fontFamily: 'Montserrat-Regular',
-            }}
-            dropDownContainerStyle={{
-              width: '90%',
-              alignSelf: 'center',
-              backgroundColor: '#E5E5E5',
-              borderColor: '#E5E5E5',
-            }}
+            // renderLeftIcon={() => (
+            //   <AntDesign
+            //     style={styles.icon}
+            //     color={isFocus ? 'blue' : 'black'}
+            //     name="Safety"
+            //     size={20}
+            //   />
+            // )}
           />
         </View>
-        <View>
+        <View style={{paddingHorizontal: 15}}>
           <Text style={styles.labeltxt}>Section</Text>
-          <DropDownPicker
-            open={sectionopen}
-            value={sectionvalue}
-            items={getdata.map(item => ({
-              label: item.numeric_name,
-              value: item.numeric_name,
+          <Dropdown
+            style={[styles.dropdown, issectionFocus && {borderColor: 'blue'}]}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            inputSearchStyle={styles.inputSearchStyle}
+            iconStyle={styles.iconStyle}
+            data={getsectiondata.map(item => ({
+              label: item.section_name,
+              value: item.section_id,
             }))}
-            setOpen={setSectionOpen}
-            setValue={setSectionValue}
-            // setItems={console.log('Selected Subject => ' + values)}
-            placeholder="Select Section"
-            multiple={false}
-            min={0}
-            max={5}
-            searchable={true}
-            // autoScroll={true}
-            // dropDownDirection="TOP"
-            style={{
-              width: '90%',
-              alignSelf: 'center',
+            search
+            containerStyle={{
               backgroundColor: '#E5E5E5',
               borderColor: '#E5E5E5',
-              marginTop: 10,
-              zIndex: classopen != false ? 0 : 1,
             }}
-            textStyle={{
-              fontSize: 13,
-              fontFamily: 'Montserrat-Regular',
-            }}
-            dropDownContainerStyle={{
-              width: '90%',
-              alignSelf: 'center',
-              backgroundColor: '#E5E5E5',
-              borderColor: '#E5E5E5',
+            fontFamily={'Montserrat-Regular'}
+            maxHeight={300}
+            labelField="label"
+            valueField="value"
+            placeholder={!issectionFocus ? 'Select item' : '...'}
+            searchPlaceholder="Search..."
+            value={sectionvalue}
+            onFocus={() => setIssectionFocus(true)}
+            onBlur={() => setIssectionFocus(false)}
+            onChange={item => {
+              setSectionValue(item.value);
+              setIssectionFocus(false);
+              getsubjectData(item);
             }}
           />
         </View>
-        <View>
+        <View style={{paddingHorizontal: 15}}>
           <Text style={styles.labeltxt}>Subject</Text>
-          <DropDownPicker
-            open={subjectopen}
+          <Dropdown
+            style={[styles.dropdown, issubjectFocus && {borderColor: 'blue'}]}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            inputSearchStyle={styles.inputSearchStyle}
+            iconStyle={styles.iconStyle}
+            data={getsubdata.map(item => ({
+              label: item.name,
+              value: item.name,
+            }))}
+            search
+            containerStyle={{
+              backgroundColor: '#E5E5E5',
+              borderColor: '#E5E5E5',
+            }}
+            fontFamily={'Montserrat-Regular'}
+            maxHeight={300}
+            labelField="label"
+            valueField="value"
+            placeholder={!issubjectFocus ? 'Select item' : '...'}
+            searchPlaceholder="Search..."
             value={subjectvalue}
-            items={getsubdata.map(item => ({label: item.name, value: item.name}))}
-            setOpen={setSubjectOpen}
-            setValue={setSubjectValue}
-            // setItems={console.log('Selected Subject => ' + values)}
-            placeholder="Select Subject"
-            multiple={false}
-            min={0}
-            max={5}
-            searchable={true}
-            // autoScroll={true}
-            // dropDownDirection="TOP"
-            style={{
-              width: '90%',
-              alignSelf: 'center',
-              backgroundColor: '#E5E5E5',
-              borderColor: '#E5E5E5',
-              marginTop: 10,
-              zIndex: classopen != false ? 0 : 1,
-            }}
-            textStyle={{
-              fontSize: 13,
-              fontFamily: 'Montserrat-Regular',
-            }}
-            dropDownContainerStyle={{
-              width: '90%',
-              alignSelf: 'center',
-              backgroundColor: '#E5E5E5',
-              borderColor: '#E5E5E5',
+            onFocus={() => setIssubjectFocus(true)}
+            onBlur={() => setIssubjectFocus(false)}
+            onChange={item => {
+              // getsectionData(item);
+              setSubjectValue(item.value);
+              setIssubjectFocus(false);
             }}
           />
         </View>
@@ -297,6 +287,7 @@ const AttendancePtm = props => {
               justifyContent: 'center',
             }}
             onPress={() => {
+              // setLoading(true);
               props.navigation.navigate('TakeAttendance', {
                 streamvalue: value,
                 classvalue: classvalue,
@@ -328,9 +319,47 @@ const styles = StyleSheet.create({
   },
   labeltxt: {
     color: '#000000',
-    marginLeft: 15,
+    // marginLeft: 15,
     marginTop: 20,
+    marginBottom: 10,
     fontSize: 14,
+    fontFamily: 'Montserrat-Regular',
+  },
+  dropdown: {
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  label: {
+    position: 'absolute',
+    backgroundColor: 'white',
+    left: 22,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 10,
+    fontSize: 14,
+    fontFamily: 'Montserrat-Regular',
+  },
+  placeholderStyle: {
+    fontSize: 16,
+    fontFamily: 'Montserrat-Regular',
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+    fontFamily: 'Montserrat-Regular',
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
     fontFamily: 'Montserrat-Regular',
   },
 });

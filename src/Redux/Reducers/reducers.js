@@ -9,10 +9,12 @@ import {
   SET_USER_IMAGE,
   SET_SCHOOL_ID,
   SET_VALUE,
+  SET_TEACHER_ID,
 } from '../Actions/actions';
 
 const initialState = {
   userid: '',
+  teacherid:'',
   schoolid:'',
   username: '',
   useremail: '',
@@ -28,6 +30,8 @@ function userReducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER_ID:
       return {...state, userid: action.payload};
+      case SET_TEACHER_ID:
+        return {...state, teacherid: action.payload};
       case SET_SCHOOL_ID:
         return {...state, schoolid: action.payload};
     case SET_USER_NAME:
