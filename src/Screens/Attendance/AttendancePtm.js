@@ -271,7 +271,7 @@ const AttendancePtm = props => {
         </View>
         {subjectvalue !== null && (
           <View>
-            <TouchableOpacity
+            <TouchableOpacity 
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',

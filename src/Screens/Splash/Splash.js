@@ -37,7 +37,7 @@ const Splash = props => {
     }
   };
   return (
-    <View style={{flex: 1, backgroundColor: COLORS.active}}>
+    <View style={{flex: 1, backgroundColor: COLORS.black}}>
       <TouchableOpacity
         onPress={StoreData}
         activeOpacity={1}
