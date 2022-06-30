@@ -8,6 +8,7 @@ import {
   RefreshControl,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {RadioButton} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
@@ -23,7 +24,6 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {COLORS} from '../../theme/Colors';
 import {paraGray} from '../../theme/styles/Base';
 
-
 const TakeAttendance = props => {
   const {streamvalue, subjectvalue, classvalue, sectionvalue} =
     props.route.params;
@@ -34,12 +34,6 @@ const TakeAttendance = props => {
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
-  const [checked, setChecked] = useState('');
-  const users = [
-    {id: '1', name: 'Vikash Yadav', checked: 'first'},
-    {id: '2', name: 'Vikash Gupta', checked: 'second'},
-  ];
-  const [stateuser, setStateusers] = useState(users);
   const [getdata, setGetdata] = useState([]);
   const [date, setDate] = useState(null);
   const [getAttendance, setAttendance] = useState([]);
@@ -99,7 +93,7 @@ const TakeAttendance = props => {
     data.map((value, index) => {
       var json_data = {
         id: value.studentId,
-        status: 0,
+        status: 1,
         attendance: 'P',
       };
       list.push(json_data);
@@ -112,17 +106,16 @@ const TakeAttendance = props => {
   const submitAttendance = async () => {
     setLoading(true);
     try {
-      
       const formData = new FormData();
       formData.append('school_id', schoolid);
       formData.append('class_id', classvalue);
       formData.append('section_id', sectionvalue);
       formData.append('date', date);
-      formData.append('students',getAttendance)
+      formData.append('students', getAttendance.toString());
       // console.log(schoolid)
       // console.log(classvalue)
       // console.log(sectionvalue)
-      // console.log(date)
+      console.log(JSON.stringify(formData));
       // console.log(getAttendance)
       let resp = await fetch(`${Url.student_attendance}`, {
         method: 'POST',
@@ -137,10 +130,13 @@ const TakeAttendance = props => {
           return response.json();
         })
         .then(result => {
-          console.log(result);
-          // setGetdata(result.data);
-          setLoading(false);
-          // getAttendance_data(result.data);
+          if (result.status == true) {
+            setLoading(false);
+            alert(result.message);
+            props.navigation.navigate('Home');
+          } else {
+            alert('Retry');
+          }
         });
     } catch (error) {
       console.log('TakeAttendance Error => ' + error);
@@ -192,7 +188,7 @@ const TakeAttendance = props => {
                       justifyContent: 'center',
                     }}>
                     <RadioButton
-                      value={getAttendance[index]}
+                      // value={getAttendance[index]}
                       status={
                         getAttendance[index].attendance === 'P'
                           ? 'checked'
@@ -229,7 +225,7 @@ const TakeAttendance = props => {
                       justifyContent: 'center',
                     }}>
                     <RadioButton
-                      value="second"
+                      // value="second"
                       status={
                         getAttendance[index].attendance === 'A'
                           ? 'checked'
@@ -272,7 +268,9 @@ const TakeAttendance = props => {
                 borderRadius: 15,
                 justifyContent: 'center',
               }}
-              onPress={() => {submitAttendance()}}>
+              onPress={() => {
+                submitAttendance();
+              }}>
               <Text
                 style={{
                   color: '#FFFFFF',

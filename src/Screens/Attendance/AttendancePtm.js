@@ -38,14 +38,13 @@ const AttendancePtm = props => {
   const [getsectiondata, setGetsectiondata] = useState([]);
   const {userinfo, userid, username, showmodal, schoolid, teacherid} =
     useSelector(state => state.userReducer);
-  const [selected, setSelected] = useState();
   const [isFocus, setIsFocus] = useState(false);
   const [issectionFocus, setIssectionFocus] = useState(false);
   const [issubjectFocus, setIssubjectFocus] = useState(false);
-  
+
   useEffect(() => {
     getapiData();
-   
+
     // console.log(date);
     // console.log("Tid"+schoolid)
     // console.log('Uid' + teacherid);
@@ -270,41 +269,43 @@ const AttendancePtm = props => {
             }}
           />
         </View>
-        <View>
-          <TouchableOpacity
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: '#000000',
-              width: '80%',
-              height: 50,
-              borderColor: '#000000',
-              alignSelf: 'center',
-              borderWidth: 1,
-              marginTop: '40%',
-              marginBottom: 30,
-              borderRadius: 15,
-              justifyContent: 'center',
-            }}
-            onPress={() => {
-              // setLoading(true);
-              props.navigation.navigate('TakeAttendance', {
-                streamvalue: value,
-                classvalue: classvalue,
-                sectionvalue: sectionvalue,
-                subjectvalue: subjectvalue,
-              });
-            }}>
-            <Text
+        {subjectvalue !== null && (
+          <View>
+            <TouchableOpacity
               style={{
-                color: '#FFFFFF',
-                fontSize: 18,
-                fontFamily: 'Montserrat-SemiBold',
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: '#000000',
+                width: '80%',
+                height: 50,
+                borderColor: '#000000',
+                alignSelf: 'center',
+                borderWidth: 1,
+                marginTop: '40%',
+                marginBottom: 30,
+                borderRadius: 15,
+                justifyContent: 'center',
+              }}
+              onPress={() => {
+                // setLoading(true);
+                props.navigation.navigate('TakeAttendance', {
+                  streamvalue: value,
+                  classvalue: classvalue,
+                  sectionvalue: sectionvalue,
+                  subjectvalue: subjectvalue,
+                });
               }}>
-              Show
-            </Text>
-          </TouchableOpacity>
-        </View>
+              <Text
+                style={{
+                  color: '#FFFFFF',
+                  fontSize: 18,
+                  fontFamily: 'Montserrat-SemiBold',
+                }}>
+                Show
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </ScrollView>
     </View>
   );

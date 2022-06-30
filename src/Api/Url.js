@@ -1,4 +1,4 @@
-const BASE_URL = "http://482f-45-250-44-237.ngrok.io/SchoolManagement/myapi";
+const BASE_URL = "http://f112-45-250-44-237.ngrok.io/SchoolManagement/myapi";
 
 export default {
     login:`${BASE_URL}/login_post`,
