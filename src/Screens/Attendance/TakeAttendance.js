@@ -7,6 +7,8 @@ import {
   StatusBar,
   RefreshControl,
   ScrollView,
+  TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {RadioButton} from 'react-native-paper';
 import {useSelector, useDispatch} from 'react-redux';
@@ -22,8 +24,9 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {COLORS} from '../../theme/Colors';
 import {paraGray} from '../../theme/styles/Base';
 
-const TakeAttendance = (props) => {
-  const {streamvalue, subjectvalue,classvalue} = props.route.params;
+const TakeAttendance = props => {
+  const {streamvalue, subjectvalue, classvalue, sectionvalue} =
+    props.route.params;
   const dispatch = useDispatch();
   const {userinfo, userid, username, showmodal, schoolid} = useSelector(
     state => state.userReducer,
@@ -31,17 +34,24 @@ const TakeAttendance = (props) => {
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
-  const [checked, setChecked] = useState('');
-  const users = [
-    {id: '1', name: 'Vikash Yadav', checked: 'first'},
-    {id: '2', name: 'Vikash Gupta', checked: 'second'},
-  ];
-  const [stateuser, setStateusers] = useState(users);
   const [getdata, setGetdata] = useState([]);
+  const [date, setDate] = useState(null);
+  const [getAttendance, setAttendance] = useState([]);
 
   useEffect(() => {
     getapiData();
-    // console.log("data "+subjectvalue)
+    // console.log('data ' + schoolid);
+    // console.log('data ' + classvalue);
+    // console.log('data ' + sectionvalue);
+    let today = new Date();
+    let date =
+      today.getDate() +
+      '-' +
+      (today.getMonth() + 1) +
+      '-' +
+      today.getFullYear();
+    setDate(date);
+    // console.log(date);
   }, []);
 
   // --------APICall----------
@@ -52,8 +62,9 @@ const TakeAttendance = (props) => {
     try {
       const formData = new FormData();
       formData.append('school_id', schoolid);
-      formData.append('teacher_id', userid);
-      let resp = await fetch(`${Url.studentList}`, {
+      formData.append('class_id', classvalue);
+      formData.append('section_id', sectionvalue);
+      let resp = await fetch(`${Url.Find_Student_By_class_section}`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -68,7 +79,64 @@ const TakeAttendance = (props) => {
         .then(result => {
           // console.log(result);
           setGetdata(result.data);
-          setLoading(false);
+
+          getAttendance_data(result.data);
+        });
+    } catch (error) {
+      console.log('TakeAttendance Error => ' + error);
+      setLoading(false);
+    }
+  };
+
+  const getAttendance_data = data => {
+    let list = [];
+    data.map((value, index) => {
+      var json_data = {
+        id: value.studentId,
+        status: 1,
+        attendance: 'P',
+      };
+      list.push(json_data);
+    });
+    setAttendance(list);
+    // console.log('here' + JSON.stringify(getAttendance));
+    setLoading(false);
+  };
+
+  const submitAttendance = async () => {
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append('school_id', schoolid);
+      formData.append('class_id', classvalue);
+      formData.append('section_id', sectionvalue);
+      formData.append('date', date);
+      formData.append('students', getAttendance.toString());
+      // console.log(schoolid)
+      // console.log(classvalue)
+      // console.log(sectionvalue)
+      console.log(JSON.stringify(formData));
+      // console.log(getAttendance)
+      let resp = await fetch(`${Url.student_attendance}`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+        body: formData,
+      })
+        .then(response => {
+          // console.log('DATA' + JSON.stringify(response));
+          return response.json();
+        })
+        .then(result => {
+          if (result.status == true) {
+            setLoading(false);
+            alert(result.message);
+            props.navigation.navigate('Home');
+          } else {
+            alert('Retry');
+          }
         });
     } catch (error) {
       console.log('TakeAttendance Error => ' + error);
@@ -90,6 +158,9 @@ const TakeAttendance = (props) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
         <View style={styles.rowcontainer}>
+          <View>
+            <Text style={styles.rowTxt}>Present</Text>
+          </View>
           <View
             style={{
               flex: 1,
@@ -100,89 +171,117 @@ const TakeAttendance = (props) => {
               Student Name
             </Text>
           </View>
-          <View
-            style={{
-              flex: 1,
-            }}>
-            <Text style={styles.rowTxt}>Present</Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-            }}>
+          <View>
             <Text style={styles.rowTxt}>Absent</Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-            }}>
-            <Text style={styles.rowTxt}>Late</Text>
           </View>
         </View>
 
-        {getdata.map((user, index) => (
-          <View style={styles.dataview} key={index}>
-            <View style={styles.radio}>
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={styles.datatxt}>{user.name}</Text>
+        {getdata.map(
+          (user, index) =>
+            getAttendance.length > 0 && (
+              <View style={styles.dataview} key={index}>
+                <View style={styles.radio}>
+                  <View
+                    style={{
+                      // flex: 1,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <RadioButton
+                      // value={getAttendance[index]}
+                      status={
+                        getAttendance[index].attendance === 'P'
+                          ? 'checked'
+                          : 'unchecked'
+                      }
+                      onPress={() => {
+                        let list = [...getAttendance];
+                        var json_data = {
+                          id: user.studentId,
+                          status: 0,
+                          attendance: 'P',
+                        };
+                        list[index] = json_data;
+                        setAttendance(list);
+                        // console.log("first"+JSON.stringify(getAttendance))
+                      }}
+                      //  onPress={() =>{ setStateusers(user.checked='first');console.log(user.checked);} }
+                      // color={'#C4C4C4'}
+                      // onChange={handleChange}
+                    />
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text style={styles.datatxt}>{user.name}</Text>
+                  </View>
+                  <View
+                    style={{
+                      // flex: 1,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <RadioButton
+                      // value="second"
+                      status={
+                        getAttendance[index].attendance === 'A'
+                          ? 'checked'
+                          : 'unchecked'
+                      }
+                      onPress={() => {
+                        let list = [...getAttendance];
+                        var json_data = {
+                          id: user.studentId,
+                          status: 0,
+                          attendance: 'A',
+                        };
+                        list[index] = json_data;
+                        setAttendance(list);
+
+                        // console.log("first"+JSON.stringify(getAttendance))
+                      }}
+                      // onPress={() =>{  setStateusers(user.checked='second');console.log(user.checked);} }
+                      // onChange={handleChange}
+                    />
+                  </View>
+                </View>
               </View>
-              <View
+            ),
+        )}
+        {getdata != '' && (
+          <View>
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: '#000000',
+                width: '80%',
+                height: 50,
+                borderColor: '#000000',
+                alignSelf: 'center',
+                borderWidth: 1,
+                marginTop: '20%',
+                marginBottom: 30,
+                borderRadius: 15,
+                justifyContent: 'center',
+              }}
+              onPress={() => {
+                submitAttendance();
+              }}>
+              <Text
                 style={{
-                  flex: 1,
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  color: '#FFFFFF',
+                  fontSize: 18,
+                  fontFamily: 'Montserrat-SemiBold',
                 }}>
-                <RadioButton
-                  value="first"
-                  status={checked === 'first' ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setChecked('first');
-                  }}
-                  //  onPress={() =>{ setStateusers(user.checked='first');console.log(user.checked);} }
-                  // color={'#C4C4C4'}
-                  // onChange={handleChange}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <RadioButton
-                  value="second"
-                  status={checked === 'second' ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setChecked('second');
-                  }}
-                  // onPress={() =>{  setStateusers(user.checked='second');console.log(user.checked);} }
-                  // onChange={handleChange}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <RadioButton
-                  value="third"
-                  status={checked === 'third' ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setChecked('third');
-                  }}
-                  // onPress={() =>{  setStateusers(user.checked='second');console.log(user.checked);} }
-                  // onChange={handleChange}
-                />
-              </View>
-            </View>
+                Submit
+              </Text>
+            </TouchableOpacity>
           </View>
-        ))}
+        )}
         {getdata == '' && (
           <View
             style={{
