@@ -125,7 +125,7 @@ const Gallery = props => {
               style={{marginTop: 10}}
               onPress={() =>
                 props.navigation.navigate('ImageDetail', {
-                  Images: Images[index],
+                  Images: getdata[index],
                 })
               }>
               <Image

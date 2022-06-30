@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -15,21 +15,25 @@ import {COLORS} from '../../theme/Colors';
 import {btnStyles, container, paraGray} from '../../theme/styles/Base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
+import Url from '../../Api/Url';
 
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
 const ImageDetail = props => {
   const {Images} = props.route.params;
+  // useEffect(() => {
+  // console.log(Images);
+  // }, []);
 
   return (
     <View style={[container.container]}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{flex: 1, marginTop: 20}}>
+        <View style={{flex: 1,}}>
           <Image
-            source={Images.image}
+            source={{uri: Url.IMG + Images.image}}
             style={{
-              height: deviceHeight / 1.3,
+              height: deviceHeight / 1.5,
               width: deviceWidth / 1,
               alignSelf: 'center',
             }}

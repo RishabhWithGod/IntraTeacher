@@ -246,7 +246,7 @@ const AttendancePtm = props => {
             iconStyle={styles.iconStyle}
             data={getsubdata.map(item => ({
               label: item.name,
-              value: item.name,
+              value: item.id,
             }))}
             search
             containerStyle={{

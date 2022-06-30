@@ -1,5 +1,5 @@
-const BASE_URL = 'http://3195-45-250-44-237.ngrok.io/SchoolManagement/myapi';
-const IMG_URL = 'https://269c-45-250-44-237.ngrok.io/SchoolManagement';
+const BASE_URL = 'http://5149-45-250-44-237.ngrok.io/SchoolManagement/myapi';
+const IMG_URL = 'http://5149-45-250-44-237.ngrok.io/SchoolManagement';
 
 export default {
   login: `${BASE_URL}/login_post`,
@@ -10,5 +10,5 @@ export default {
   Find_Student_By_class_section: `${BASE_URL}/Find_Student_By_class_section`,
   student_attendance: `${BASE_URL}/student_attendance`,
   get_school_gallery: `${BASE_URL}/get_school_gallery`,
-  IMG: `${IMG_URL}/assets/uploads/gallery`,
+  IMG: `${IMG_URL}/assets/uploads/gallery/`,
 };

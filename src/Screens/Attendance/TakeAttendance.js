@@ -112,12 +112,13 @@ const TakeAttendance = props => {
       formData.append('class_id', classvalue);
       formData.append('section_id', sectionvalue);
       formData.append('date', date);
+      formData.append('subject_id',JSON.stringify(subjectvalue))
       formData.append('students', JSON.stringify( getAttendance));
       // console.log(schoolid)
       // console.log(classvalue)
-      // console.log(sectionvalue)
+      // console.log(subjectvalue)
       // console.log(JSON.stringify(formData));
-      console.log(getAttendance)
+      // console.log(getAttendance)
       let resp = await fetch(`${Url.student_attendance}`, {
         method: 'POST',
         headers: {
@@ -131,11 +132,11 @@ const TakeAttendance = props => {
           return response.json();
         })
         .then(result => {
-          console.log(JSON.stringify(result.data))
+          console.log("hello"+JSON.stringify(result))
           if (result.status == true) {
             setLoading(false);
             alert(result.message);
-            // props.navigation.navigate('Home');
+            props.navigation.navigate('Home');
           } else {
             alert('Retry');
             setLoading(false);
