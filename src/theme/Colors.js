@@ -50,6 +50,7 @@ export const COLORS = {
   lightSkyblue:'rgba(45, 140, 255, 0.25)',
   lightSkygreen:'rgba(11, 172, 0, 0.25)',
   lightSkyyellow:'rgba(255, 165, 0, 0.2)',
+  onboardback:'rgba(205, 13, 253, 0.8)',
   // true: {
   //   bg: "#363636",
   //   txtBlu: 'white',

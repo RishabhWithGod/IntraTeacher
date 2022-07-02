@@ -144,7 +144,7 @@ const Student = props => {
                           alignItems: 'center',
                           width: 40,
                           height: 40,
-                          borderRadius: 20, 
+                          borderRadius: 20,
                         }}>
                         <FontAwesome5
                           name="user-alt"
@@ -168,7 +168,7 @@ const Student = props => {
             </TouchableOpacity>
           </View>
         ))}
-        {getdata == '' && (
+        {getdata == '' && loading == false && (
           <View
             style={{
               flex: 1,
@@ -181,24 +181,26 @@ const Student = props => {
             </Text>
           </View>
         )}
-        <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-          <TouchableOpacity
-            style={{
-              position: search == '' ? 'absolute' : 'relative',
-              bottom: 10,
-              right: 10,
-              height: 60,
-              width: 60,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: '#000000',
-              borderRadius: 60,
-              marginTop: 20,
-            }}
-            onPress={() => props.navigation.navigate('Info')}>
-            <Feather name="plus" size={30} color="white" />
-          </TouchableOpacity>
-        </View>
+        {loading == false && (
+          <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+            <TouchableOpacity
+              style={{
+                position: search == '' ? 'absolute' : 'relative',
+                bottom: 10,
+                right: 10,
+                height: 60,
+                width: 60,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#000000',
+                borderRadius: 60,
+                marginTop: 20,
+              }}
+              onPress={() => props.navigation.navigate('Info')}>
+              <Feather name="plus" size={30} color="white" />
+            </TouchableOpacity>
+          </View>
+        )}
       </ScrollView>
     </View>
   );

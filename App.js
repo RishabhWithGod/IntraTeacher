@@ -125,7 +125,8 @@ import {
 } from './src/Redux/Actions/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import Splash from './src/Screens/Splash/Splash';
-import { COLORS } from './src/theme/Colors';
+import {COLORS} from './src/theme/Colors';
+import OnBoarding from './src/Screens/OnBoarding/OnBoarding';
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -138,7 +139,7 @@ function App() {
           <Drawer.Screen
             name="HomeDrawer"
             component={HomeStackScreen}
-            options={{headerShown: false}}
+            options={{headerShown: false, swipeEnabled: false}}
           />
           {/* <Drawer.Screen name="Notifications" component={Notification} /> */}
         </Drawer.Navigator>
@@ -149,10 +150,12 @@ function App() {
 
 export default App;
 
+const DrawerScreen = () => {};
+
 const HomeStackScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
-  const {userinfo, userid, username, showmodal,userimage} = useSelector(
+  const {userinfo, userid, username, showmodal, userimage} = useSelector(
     state => state.userReducer,
   );
   useEffect(() => {
@@ -165,7 +168,7 @@ const HomeStackScreen = ({navigation}) => {
       const user_image = await AsyncStorage.getItem('user_image');
       dispatch(setuserId(user_Id));
       dispatch(setuserName(user_name));
-      dispatch(setuserImage(user_image))
+      dispatch(setuserImage(user_image));
     } catch (error) {
       console.log('Catch' + error);
     }
@@ -192,7 +195,14 @@ const HomeStackScreen = ({navigation}) => {
           headerShown: false,
         }}
       />
-
+      <HomeStack.Screen
+        name="OnBoarding"
+        component={OnBoarding}
+        options={{
+          animationEnabled: false,
+          headerShown: false,
+        }}
+      />
       <HomeStack.Screen
         name="SignIn"
         component={SignIn}
@@ -289,7 +299,7 @@ const HomeStackScreen = ({navigation}) => {
           headerTintColor: 'white',
         }}
       />
-       <HomeStack.Screen
+      <HomeStack.Screen
         name="Info"
         component={Info}
         options={{

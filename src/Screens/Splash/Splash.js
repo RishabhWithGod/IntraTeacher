@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, TouchableOpacity, Image, StatusBar} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {COLORS} from '../../theme/Colors';
 import {useSelector, useDispatch} from 'react-redux';
@@ -17,18 +17,26 @@ const Splash = props => {
   const {userinfo, userid, username, showmodal} = useSelector(
     state => state.userReducer,
   );
-    useEffect(() => {
-      StoreData();
-    }, []);
+  useEffect(() => {
+    StoreData();
+  }, []);
   const StoreData = async () => {
     try {
+      const onboarddata = await AsyncStorage.getItem('onboard');
       const user_Id = await AsyncStorage.getItem('user_id');
       const user_name = await AsyncStorage.getItem('name');
+      // const onboard = await AsyncStorage.getItem('onboard');
+      // setOnboarding(onboard);
       setUserLogin(user_Id);
       dispatch(setuserId(user_Id));
       dispatch(setuserName(user_name));
+      // console.log('hell' + onboarding);
+
       if (user_Id !== null) {
         props.navigation.navigate('Home');
+      } else if (onboarddata == null) {
+        AsyncStorage.setItem('onboard', 'false');
+        props.navigation.navigate('OnBoarding');
       } else {
         props.navigation.navigate('SignIn');
       }
@@ -38,6 +46,7 @@ const Splash = props => {
   };
   return (
     <View style={{flex: 1, backgroundColor: COLORS.black}}>
+      <StatusBar backgroundColor={COLORS.black} barStyle={'light-content'} />
       <TouchableOpacity
         onPress={StoreData}
         activeOpacity={1}
