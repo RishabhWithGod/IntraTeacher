@@ -127,6 +127,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import Splash from './src/Screens/Splash/Splash';
 import {COLORS} from './src/theme/Colors';
 import OnBoarding from './src/Screens/OnBoarding/OnBoarding';
+import Url from './src/Api/Url';
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -262,7 +263,7 @@ const HomeStackScreen = ({navigation}) => {
                   dispatch(setShowModal(!showmodal));
                 }}>
                 <Avatar.Image
-                  source={{}}
+                  source={{uri:Url.profile_IMG+userimage}}
                   size={35}
                   backgroundColor={COLORS.black}
                 />

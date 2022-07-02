@@ -56,7 +56,7 @@ const SignIn = props => {
           Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
         },
-        body: formData
+        body: formData,
       })
         .then(response => {
           // console.log('DATA' + JSON.stringify(response));
@@ -68,13 +68,28 @@ const SignIn = props => {
             let userinfo = result.data.teacher_data[0];
             dispatch(setuserInfo(userinfo));
             // dispatch(setuserName(username.e_name));
-            AsyncStorage.setItem('user_id', result.data.teacher_data[0].user_id);
-            AsyncStorage.setItem('teacher_id', result.data.teacher_data[0].teacher_id);
+            AsyncStorage.setItem(
+              'user_id',
+              result.data.teacher_data[0].user_id,
+            );
+            AsyncStorage.setItem(
+              'teacher_id',
+              result.data.teacher_data[0].teacher_id,
+            );
             AsyncStorage.setItem('user_name', result.data.teacher_data[0].name);
-            AsyncStorage.setItem('school_id', result.data.teacher_data[0].school_id);
-            AsyncStorage.setItem('user_email', result.data.teacher_data[0].email);
+            AsyncStorage.setItem(
+              'school_id',
+              result.data.teacher_data[0].school_id,
+            );
+            AsyncStorage.setItem(
+              'user_email',
+              result.data.teacher_data[0].email,
+            );
 
-            // AsyncStorage.setItem('user_image', result.data.profile_picture);
+            AsyncStorage.setItem(
+              'user_image',
+              result.data.teacher_data[0].photo,
+            );
             // dispatch(setuserName(username));
             // console.log('userID =>' + JSON.stringify(result.data.teacher_data[0].id));
             setLoading(false);
@@ -121,7 +136,9 @@ const SignIn = props => {
   return (
     <View style={[container.container, {backgroundColor: '#5151C6'}]}>
       {loading == true && <Spinner visible={load} />}
-      <ScrollView contentContainerStyle={{justifyContent: 'flex-end'}}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{justifyContent: 'flex-end'}}>
         <StatusBar backgroundColor="#5151C6" barStyle={'light-content'} />
         <View style={{alignItems: 'center', marginTop: 10}}>
           <Text style={[paraGray.parahome, {color: COLORS.bg}]}>Login</Text>
@@ -179,7 +196,10 @@ const SignIn = props => {
               borderColor: COLORS.bg,
               elevation: 3,
             }}>
-            <Image style={{height:55,width:45,marginVertical:5}} source={require('../../../assets/Pincode.png')} />
+            <Image
+              style={{height: 55, width: 45, marginVertical: 5}}
+              source={require('../../../assets/Pincode.png')}
+            />
           </TouchableOpacity>
         </View>
         <KeyboardAvoidingView showsVerticalScrollIndicator={false}>

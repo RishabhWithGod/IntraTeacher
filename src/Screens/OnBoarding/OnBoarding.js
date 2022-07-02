@@ -1,12 +1,15 @@
 import React from 'react';
-import {View, Text, Image, StatusBar} from 'react-native';
+import {View, Text, Image, StatusBar, ScrollView} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
+import { Button } from 'react-native-paper';
 import {COLORS} from '../../theme/Colors';
 import {paraGray} from '../../theme/styles/Base';
 
 const OnBoarding = props => {
+  
   return (
     <View style={{flex: 1}}>
+      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
       <StatusBar backgroundColor={COLORS.bg} barStyle={'dark-content'} />
       <Onboarding
         pages={[
@@ -111,12 +114,14 @@ const OnBoarding = props => {
             ),
           },
         ]}
+        
         showPagination={true}
         bottomBarColor={COLORS.bg}
         bottomBarHighlight={true}
         onDone={() => props.navigation.navigate('SignIn')}
         onSkip={() => props.navigation.navigate('SignIn')}
       />
+      {/* </ScrollView> */}
     </View>
   );
 };

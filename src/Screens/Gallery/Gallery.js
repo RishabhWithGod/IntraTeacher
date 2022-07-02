@@ -31,36 +31,7 @@ const Gallery = props => {
   const [refreshing, setRefreshing] = React.useState(false);
   const {userinfo, userid, username, showmodal, schoolid, teacherid} =
     useSelector(state => state.userReducer);
-  const Images = [
-    {
-      id: '1',
-      title: 'Rob Strated following you.',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      time: '10 min ago',
-      image: require('../../../assets/image100.png'),
-    },
-    {
-      id: '2',
-      title: 'Rob Sent you a connection request',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      time: '1 hour ago',
-      image: require('../../../assets/image103.png'),
-    },
-    {
-      id: '3',
-      title: 'Webinar is live join now',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      time: '1 hour ago',
-      image: require('../../../assets/image100.png'),
-    },
-    {
-      id: '4',
-      title: 'Faculty marked absent for your science online lecture',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      time: '50 min ago',
-      image: require('../../../assets/image103.png'),
-    },
-  ];
+ 
 
   useEffect(() => {
     getapiData();
@@ -93,7 +64,7 @@ const Gallery = props => {
           return response.json();
         })
         .then(result => {
-          // console.log(result);
+          console.log(result);
           setdata(result.data);
           // console.log('hi' + result.data);
           setLoading(false);
@@ -129,7 +100,7 @@ const Gallery = props => {
                 })
               }>
               <Image
-                source={{uri: Url.IMG + image.image}}
+                source={{uri: Url.gallery_IMG + image.image}}
                 style={{
                   height: deviceHeight / 3,
                   width: deviceWidth / 2 - 6,
@@ -140,20 +111,20 @@ const Gallery = props => {
             </TouchableOpacity>
           ))}
         </View>
-        {getdata == '' && (
+        {getdata == '' && loading == false && (
           <View
             style={{
               flex: 1,
               marginBottom: 80,
               alignSelf: 'center',
               justifyContent: 'center',
-              marginTop: 150,
+              marginTop: 120,
             }}>
             <Text style={[paraGray.darklarge, {textAlign: 'center'}]}>
               NO Data Found
             </Text>
           </View>
-        )}
+        )} 
       </ScrollView>
     </View>
   );
