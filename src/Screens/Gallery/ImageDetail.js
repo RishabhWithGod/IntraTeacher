@@ -22,16 +22,16 @@ let deviceWidth = Dimensions.get('window').width;
 
 const ImageDetail = props => {
   const {Images} = props.route.params;
-  // useEffect(() => {
-  // console.log(Images);
-  // }, []);
+  useEffect(() => {
+    console.log(Images);
+  }, []);
 
   return (
     <View style={[container.container]}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{flex: 1,}}>
+        <View style={{flex: 1}}>
           <Image
-            source={{uri: Url.IMG + Images.image}}
+            source={{uri: Url.gallery_IMG + Images.image}}
             style={{
               height: deviceHeight / 1.5,
               width: deviceWidth / 1,

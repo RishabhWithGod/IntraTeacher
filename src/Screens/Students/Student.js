@@ -124,7 +124,7 @@ const Student = props => {
         </View>
 
         {studentfilter.map((student, index) => (
-          <View style={{flex: 1}}>
+          <View style={{flex: 1}} key={index}>
             <TouchableOpacity
               style={styles.userinfo}
               key={index}

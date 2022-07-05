@@ -46,8 +46,8 @@ const AttendancePtm = props => {
     getapiData();
 
     // console.log(date);
-    // console.log("Tid"+schoolid)
-    // console.log('Uid' + teacherid);
+    console.log("Tid"+teacherid)
+    console.log('Uid' + userid);
   }, []);
 
   // --------APICall----------
@@ -57,7 +57,7 @@ const AttendancePtm = props => {
     setLoading(true);
     try {
       const formData = new FormData();
-      // formData.append('school_id', schoolid);
+      formData.append('user_id', userid);
       formData.append('teacher_id', teacherid);
 
       let resp = await fetch(`${Url.get_all_class}`, {
@@ -119,14 +119,14 @@ const AttendancePtm = props => {
   };
   const getsubjectData = async item => {
     // setSectionValue(item.value);
-    // console.log('firstS' + sectionvalue);
+    console.log('firstS' + item.value);
     // setRefreshing(false);
     // setLoading(true);
     try {
       const formData = new FormData();
       // formData.append('school_id', schoolid);
       formData.append('teacher_id', userid);
-      formData.append('class_id', item.value);
+      formData.append('class_id', classvalue);
       let resp = await fetch(`${Url.get_subject_classID}`, {
         method: 'POST',
         headers: {
@@ -236,7 +236,7 @@ const AttendancePtm = props => {
             }}
           />
         </View>
-        <View style={{paddingHorizontal: 15}}>
+        <View style={{paddingHorizontal: 15,marginBottom:10}}>
           <Text style={styles.labeltxt}>Subject</Text>
           <Dropdown
             style={[styles.dropdown, issubjectFocus && {borderColor: 'blue'}]}

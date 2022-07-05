@@ -15,7 +15,7 @@ export const COLORS = {
   transperentColor: 'transparent',
   green: '#0BAC00',
   darkblue: '#5375E2',
-  blue: '#6789CA',
+  blue: '#2D8CFF',
   header: '#333333',
   lightred: 'rgba(238, 47, 47, 0.6)',
   border: '#E1E3E8',
