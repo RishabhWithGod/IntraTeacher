@@ -128,6 +128,7 @@ import Splash from './src/Screens/Splash/Splash';
 import {COLORS} from './src/theme/Colors';
 import OnBoarding from './src/Screens/OnBoarding/OnBoarding';
 import Url from './src/Api/Url';
+import LeaveRequest from './src/Screens/Leave/LeaveRequest';
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -263,7 +264,7 @@ const HomeStackScreen = ({navigation}) => {
                   dispatch(setShowModal(!showmodal));
                 }}>
                 <Avatar.Image
-                  source={{uri:Url.profile_IMG+userimage}}
+                  source={{uri: Url.profile_IMG + userimage}}
                   size={35}
                   backgroundColor={COLORS.black}
                 />
@@ -1436,6 +1437,19 @@ const HomeStackScreen = ({navigation}) => {
         component={ImageDetail}
         options={{
           title: 'Gallery',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+
+      <HomeStack.Screen
+        name="LeaveRequest"
+        component={LeaveRequest}
+        options={{
+          title: 'Leave Request',
 
           headerStyle: {
             backgroundColor: 'black',

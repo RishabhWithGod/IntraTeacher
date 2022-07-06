@@ -21,7 +21,6 @@ import {useSelector, useDispatch} from 'react-redux';
 import Url from '../../Api/Url';
 import {COLORS} from '../../theme/Colors';
 import Spinner from 'react-native-loading-spinner-overlay';
-import RNSearchablePicker from 'react-native-searchable-picker';
 import {Dropdown} from 'react-native-element-dropdown';
 
 const AttendancePtm = props => {
@@ -182,7 +181,7 @@ const AttendancePtm = props => {
             fontFamily={'Montserrat-Regular'}
             maxHeight={300}
             labelField="label"
-            valueField="value"
+            valueField={getdata== ''?"fdd":"value"}
             placeholder={!isFocus ? 'Select item' : '...'}
             searchPlaceholder="Search..."
             value={classvalue}
