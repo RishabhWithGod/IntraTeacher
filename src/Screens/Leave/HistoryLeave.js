@@ -94,13 +94,12 @@ const HistoryLeave = props => {
               height: 70,
               borderColor: '#E5E5E5',
               alignSelf: 'center',
-              borderWidth: 2,
+              borderWidth: 1,
               marginTop: 20,
               borderRadius: 5,
               justifyContent: 'space-between',
             }}
             onPress={() => {
-              console.log('data=' + JSON.stringify(leaves[index]));
               props.navigation.navigate('HistoryLeaveDetail', {
                 leaves: leaves[index],
               });

@@ -61,9 +61,11 @@ const LeaveRequest = () => {
                 <View
                   style={{
                     flex: 1,
-                    backgroundColor: COLORS.background,
+                    backgroundColor: COLORS.bg,
                     borderRadius: 10,
                     paddingHorizontal: 10,
+                    borderWidth:1,
+                    borderColor:COLORS.background
                   }}>
                   <View
                     style={{
@@ -137,7 +139,7 @@ const LeaveRequest = () => {
                     style={{
                       // borderBottomLeftRadius: 10,
                       // borderBottomRightRadius: 10,
-                      backgroundColor: COLORS.background,
+                      backgroundColor: COLORS.bg,
                     }}
                     titleStyle={[paraGray.darkpara]}
                     title="View Detail">
