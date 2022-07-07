@@ -41,6 +41,7 @@
     "react-native-loading-spinner-overlay": "^3.0.0",
     "react-native-modal-datetime-picker": "^13.0.0",
     "react-native-multiple-select": "^0.5.7",
+    "react-native-onboarding-swiper": "^1.2.0",
     "react-native-pager-view": "^5.4.9",
     "react-native-paper": "^4.10.1",
     "react-native-paper-select": "^0.2.0",

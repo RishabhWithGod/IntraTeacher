@@ -84,6 +84,7 @@ const TakeAttendance = props => {
         });
     } catch (error) {
       console.log('TakeAttendance Error => ' + error);
+      
       setLoading(false);
     }
   };
@@ -93,7 +94,7 @@ const TakeAttendance = props => {
     data.map((value, index) => {
       var json_data = {
         id: value.studentId,
-        status: 1,
+        status: 0,
         attendance: 'P',
       };
       list.push(json_data);
@@ -111,16 +112,17 @@ const TakeAttendance = props => {
       formData.append('class_id', classvalue);
       formData.append('section_id', sectionvalue);
       formData.append('date', date);
-      formData.append('students', getAttendance.toString());
+      formData.append('subject_id',JSON.stringify(subjectvalue))
+      formData.append('students', JSON.stringify( getAttendance));
       // console.log(schoolid)
       // console.log(classvalue)
-      // console.log(sectionvalue)
-      console.log(JSON.stringify(formData));
+      // console.log(subjectvalue)
+      // console.log(JSON.stringify(formData));
       // console.log(getAttendance)
       let resp = await fetch(`${Url.student_attendance}`, {
         method: 'POST',
         headers: {
-          Accept: 'application/json',
+          // Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
         },
         body: formData,
@@ -130,16 +132,19 @@ const TakeAttendance = props => {
           return response.json();
         })
         .then(result => {
+          console.log("hello"+JSON.stringify(result))
           if (result.status == true) {
             setLoading(false);
             alert(result.message);
             props.navigation.navigate('Home');
           } else {
             alert('Retry');
+            setLoading(false);
           }
         });
     } catch (error) {
       console.log('TakeAttendance Error => ' + error);
+      alert(error)
       setLoading(false);
     }
   };

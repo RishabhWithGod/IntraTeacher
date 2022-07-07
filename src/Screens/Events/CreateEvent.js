@@ -34,8 +34,6 @@ const CreateEvent = () => {
         </View>
         <Text style={styles.formtxt}>Add Description:</Text>
         <AutoGrowingTextInput style={styles.txtboxDesc} placeholder={'Add Description'} />
-        
-
         <Text style={styles.formtxt}>Add Image/Optional:</Text>
         <View style={styles.txtbox}>
           <TextInput
