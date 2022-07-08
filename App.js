@@ -129,6 +129,8 @@ import {COLORS} from './src/theme/Colors';
 import OnBoarding from './src/Screens/OnBoarding/OnBoarding';
 import Url from './src/Api/Url';
 import LeaveRequest from './src/Screens/Leave/LeaveRequest';
+import Settings from './src/Screens/Settings/Settings';
+import TeachersProfile from './src/Screens/TeachersProfile/TeachersProfile';
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -1450,6 +1452,30 @@ const HomeStackScreen = ({navigation}) => {
         component={LeaveRequest}
         options={{
           title: 'Leave Request',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+       <HomeStack.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          title: 'Settings',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+       <HomeStack.Screen
+        name="TeachersProfile"
+        component={TeachersProfile}
+        options={{
+          title: 'My Profile',
 
           headerStyle: {
             backgroundColor: 'black',

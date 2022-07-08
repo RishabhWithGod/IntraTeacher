@@ -64,7 +64,7 @@ const LeaveRequest = () => {
                     backgroundColor: COLORS.bg,
                     borderRadius: 10,
                     paddingHorizontal: 10,
-                    borderWidth: 1,
+                    borderWidth: 2,
                     borderColor: COLORS.background,
                   }}>
                   <View

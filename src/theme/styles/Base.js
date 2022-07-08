@@ -38,7 +38,7 @@ const paraGray = StyleSheet.create({
     opacity: 0.71,
   },
   darkpara: {
-    fontSize: 14,
+    fontSize: 15,
     color: '#000000',
     fontFamily: 'Poppins-Regular',
   },

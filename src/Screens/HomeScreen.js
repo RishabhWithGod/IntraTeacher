@@ -31,6 +31,9 @@ import {
   setuserImage,
   setschoolId,
   setTeacherId,
+  setuserPhone,
+  setuserAddress,
+  setuserDOB,
 } from '../Redux/Actions/actions';
 import {COLORS} from '../theme/Colors';
 import {useFocusEffect} from '@react-navigation/native';
@@ -78,13 +81,22 @@ const HomeScreen = props => {
       const school_id = await AsyncStorage.getItem('school_id');
       const user_email = await AsyncStorage.getItem('user_email');
       const user_image = await AsyncStorage.getItem('user_image');
+      const user_dob = await AsyncStorage.getItem('dob');
+      const user_present_address = await AsyncStorage.getItem(
+        'present_address',
+      );
+      const user_phone = await AsyncStorage.getItem('phone');
+
       dispatch(setuserId(user_Id));
       dispatch(setTeacherId(teacher_Id));
       dispatch(setuserName(user_name));
       dispatch(setschoolId(school_id));
       dispatch(setuserEmail(user_email));
       dispatch(setuserImage(user_image));
-      // console.log("first"+user_image)
+      dispatch(setuserDOB(user_dob));
+      dispatch(setuserAddress(user_present_address));
+      dispatch(setuserPhone(user_phone));
+      // console.log("first"+user_dob)
       setLoading(false);
     } catch (error) {
       console.log('Catch' + error);
@@ -373,7 +385,8 @@ const HomeScreen = props => {
           borderRadius: 5,
         }}>
         <TouchableOpacity
-          style={{flex: 1, justifyContent: 'center', paddingLeft: 15}}>
+          style={{flex: 1, justifyContent: 'center', paddingLeft: 15}}
+          onPress={() => props.navigation.navigate('Settings')}>
           <Text style={[paraGray.darkpara]}>Settings</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -419,8 +432,8 @@ const styles = StyleSheet.create({
   },
   headline: {
     flexDirection: 'row',
-    color: 'black', // <-- The magic
-    textAlign: 'center', // <-- The magic
+    color: 'black',
+    textAlign: 'center',
 
     fontSize: 18,
     paddingHorizontal: 20,
@@ -457,14 +470,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: 70,
     height: 70,
-    // backgroundColor: '#fdeae7' /* '#FF6347' */,
     borderRadius: 50,
   },
   categoryBtnTxt: {
     alignSelf: 'center',
     marginTop: 5,
     fontSize: 12,
-    // fontWeight: 'bold',
     color: '#000000',
     fontFamily: 'Poppins-SemiBold',
   },
@@ -476,7 +487,6 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     marginTop: 10,
-    // backgroundColor: '#fdeae7' /* '#FF6347' */,
     borderRadius: 50,
   },
   categoryBtnsTxt: {
