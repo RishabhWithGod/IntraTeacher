@@ -15,7 +15,7 @@ export const COLORS = {
   transperentColor: 'transparent',
   green: '#0BAC00',
   darkblue: '#5375E2',
-  blue: '#6789CA',
+  blue: '#2D8CFF',
   header: '#333333',
   lightred: 'rgba(238, 47, 47, 0.6)',
   border: '#E1E3E8',
@@ -50,6 +50,8 @@ export const COLORS = {
   lightSkyblue:'rgba(45, 140, 255, 0.25)',
   lightSkygreen:'rgba(11, 172, 0, 0.25)',
   lightSkyyellow:'rgba(255, 165, 0, 0.2)',
+  onboardback:'rgba(205, 13, 253, 0.8)',
+  lightbblack:'#323643',
   // true: {
   //   bg: "#363636",
   //   txtBlu: 'white',

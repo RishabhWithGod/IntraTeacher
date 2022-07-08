@@ -30,6 +30,7 @@ import {
   setuserEmail,
   setuserImage,
   setschoolId,
+  setTeacherId,
 } from '../Redux/Actions/actions';
 import {COLORS} from '../theme/Colors';
 import {useFocusEffect} from '@react-navigation/native';
@@ -48,8 +49,10 @@ const HomeScreen = props => {
     try {
       const user_Id = await AsyncStorage.getItem('user_id');
       const user_name = await AsyncStorage.getItem('user_name');
+      const user_image = await AsyncStorage.getItem('user_image');
       await AsyncStorage.removeItem('user_id');
       await AsyncStorage.removeItem('user_name');
+      await AsyncStorage.removeItem('user_image');
       // await AsyncStorage.removeItem('user_email');
       // await AsyncStorage.removeItem('user_image');
       dispatch(setShowModal(false));
@@ -70,16 +73,18 @@ const HomeScreen = props => {
     setLoading(true);
     try {
       const user_Id = await AsyncStorage.getItem('user_id');
+      const teacher_Id = await AsyncStorage.getItem('teacher_id');
       const user_name = await AsyncStorage.getItem('user_name');
       const school_id = await AsyncStorage.getItem('school_id');
       const user_email = await AsyncStorage.getItem('user_email');
-      // const user_image = await AsyncStorage.getItem('user_image');
+      const user_image = await AsyncStorage.getItem('user_image');
       dispatch(setuserId(user_Id));
+      dispatch(setTeacherId(teacher_Id));
       dispatch(setuserName(user_name));
       dispatch(setschoolId(school_id));
       dispatch(setuserEmail(user_email));
-      // dispatch(setuserImage(user_image));
-      // console.log("first"+school_id)
+      dispatch(setuserImage(user_image));
+      // console.log("first"+user_image)
       setLoading(false);
     } catch (error) {
       console.log('Catch' + error);
