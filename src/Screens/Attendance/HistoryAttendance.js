@@ -45,6 +45,7 @@ const HistoryAttendance = props => {
             marginTop: 15,
             borderRadius: 10,
           }}>
+            
           <TextInput
             placeholder="Search by Names."
             placeholderTextColor="#808080"
