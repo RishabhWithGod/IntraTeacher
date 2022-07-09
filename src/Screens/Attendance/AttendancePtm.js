@@ -40,7 +40,7 @@ const AttendancePtm = props => {
   const [isFocus, setIsFocus] = useState(false);
   const [issectionFocus, setIssectionFocus] = useState(false);
   const [issubjectFocus, setIssubjectFocus] = useState(false);
-
+  
   useEffect(() => {
     getapiData();
 
@@ -85,7 +85,7 @@ const AttendancePtm = props => {
   const getsectionData = async item => {
     // setValue(item);
 
-    // console.log('first' + JSON.stringify(value));
+    // console.log('first' + JSON.stringify(classvalue));
     // getsectionData();
     // setRefreshing(false);
     // setLoading(true);
