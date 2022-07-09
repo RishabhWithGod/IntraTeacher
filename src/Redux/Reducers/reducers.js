@@ -10,35 +10,41 @@ import {
   SET_SCHOOL_ID,
   SET_VALUE,
   SET_TEACHER_ID,
+  SET_USER_DOB,
+  SET_USER_ADDRESS,
+  SET_USER_PHONE,
 } from '../Actions/actions';
 
 const initialState = {
   userid: '',
-  teacherid:'',
-  schoolid:'',
+  teacherid: '',
+  schoolid: '',
   username: '',
   useremail: '',
-  userimage:'',
+  userimage: '',
   userinfo: '',
+  userdob: '',
+  useraddress: '',
+  userphone: '',
   showprofile: false,
   showmodal: false,
-  checked:'',
-  value:null,
+  checked: '',
+  value: null,
 };
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER_ID:
       return {...state, userid: action.payload};
-      case SET_TEACHER_ID:
-        return {...state, teacherid: action.payload};
-      case SET_SCHOOL_ID:
-        return {...state, schoolid: action.payload};
+    case SET_TEACHER_ID:
+      return {...state, teacherid: action.payload};
+    case SET_SCHOOL_ID:
+      return {...state, schoolid: action.payload};
     case SET_USER_NAME:
       return {...state, username: action.payload};
     case SET_USER_EMAIL:
       return {...state, useremail: action.payload};
-      case SET_USER_IMAGE:
+    case SET_USER_IMAGE:
       return {...state, userimage: action.payload};
     case SET_USER_INFO:
       return {...state, userinfo: action.payload};
@@ -46,10 +52,16 @@ function userReducer(state = initialState, action) {
       return {...state, showprofile: action.payload};
     case SET_SHOW_MODAL:
       return {...state, showmodal: action.payload};
-      case SET_CHECKED:
-        return {...state, checked: action.payload};
-        case SET_VALUE:
-          return {...state, value: action.payload};
+    case SET_CHECKED:
+      return {...state, checked: action.payload};
+    case SET_VALUE:
+      return {...state, value: action.payload};
+    case SET_USER_DOB:
+      return {...state, userdob: action.payload};
+      case SET_USER_ADDRESS:
+        return {...state, useraddress: action.payload};
+        case SET_USER_PHONE:
+          return {...state, userphone: action.payload};
     default:
       return state;
   }

@@ -56,14 +56,16 @@ const LeaveRequest = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{flex: 1, marginTop: 20, marginBottom: 20}}>
           {data.map((data, index) => (
-            <View style={{flex: 1, paddingHorizontal: 10}}>
+            <View style={{flex: 1, paddingHorizontal: 10}} key={index}>
               <List.Section>
                 <View
                   style={{
                     flex: 1,
-                    backgroundColor: COLORS.background,
+                    backgroundColor: COLORS.bg,
                     borderRadius: 10,
                     paddingHorizontal: 10,
+                    borderWidth: 2,
+                    borderColor: COLORS.background,
                   }}>
                   <View
                     style={{
@@ -137,7 +139,7 @@ const LeaveRequest = () => {
                     style={{
                       // borderBottomLeftRadius: 10,
                       // borderBottomRightRadius: 10,
-                      backgroundColor: COLORS.background,
+                      backgroundColor: COLORS.bg,
                     }}
                     titleStyle={[paraGray.darkpara]}
                     title="View Detail">

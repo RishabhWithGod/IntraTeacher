@@ -90,6 +90,13 @@ const SignIn = props => {
               'user_image',
               result.data.teacher_data[0].photo,
             );
+            AsyncStorage.setItem('dob', result.data.teacher_data[0].dob);
+            AsyncStorage.setItem(
+              'present_address',
+              result.data.teacher_data[0].present_address,
+            );
+            AsyncStorage.setItem('phone', result.data.teacher_data[0].phone);
+
             // dispatch(setuserName(username));
             // console.log('userID =>' + JSON.stringify(result.data.teacher_data[0].id));
             setLoading(false);

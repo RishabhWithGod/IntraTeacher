@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   View,
   Text,
@@ -8,12 +8,11 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
-} from 'react-native'
-import {Avatar} from 'react-native-paper'
-import Feather from 'react-native-vector-icons/Feather'
+} from 'react-native';
+import {Avatar} from 'react-native-paper';
+import Feather from 'react-native-vector-icons/Feather';
 
 const HistoryLeaveDetail = props => {
-
   const {leaves} = props.route.params;
 
   return (
@@ -51,35 +50,32 @@ const HistoryLeaveDetail = props => {
             </View> */}
 
       <View style={{marginTop: 15}}>
-
-          <Text style={styles.txt}>
-            Title:
-            <Text style={styles.datatxt}>{leaves.studentname}</Text>
-          </Text>
+        <Text style={styles.txt}>
+          Title:
+          <Text style={styles.datatxt}>{leaves.studentname}</Text>
+        </Text>
         {/* <Text style={styles.txt}>
                         Std:{book.value}
                     </Text> */}
         <Text style={styles.txt}>
-           Discription:
-           <Text style={styles.datatxt}>{leaves.stream}</Text>
-         </Text>
-         <Text style={styles.txt}>
-           Days:
-           <Text style={styles.datatxt}>{leaves.days}</Text>
-         </Text>
-         <Text style={styles.txt}>
-           {leaves.reasonlabel}:
-           <Text style={styles.datatxt}>{leaves.approveleave}</Text>
-         </Text>
+          Discription:
+          <Text style={styles.datatxt}>{leaves.stream}</Text>
+        </Text>
+        <Text style={styles.txt}>
+          Days:
+          <Text style={styles.datatxt}>{leaves.days}</Text>
+        </Text>
+        <Text style={styles.txt}>
+          {leaves.reasonlabel}:
+          <Text style={styles.datatxt}>{leaves.approveleave}</Text>
+        </Text>
       </View>
-      <View>
-      </View>
+      <View></View>
     </ScrollView>
-    
-  )
-}
+  );
+};
 
-export default HistoryLeaveDetail
+export default HistoryLeaveDetail;
 
 const styles = StyleSheet.create({
   container: {
@@ -117,4 +113,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Montserrat-SemiBold',
   },
-})
+});

@@ -9,6 +9,9 @@ export const SET_SHOW_PROFILE = 'SET_SHOW_PROFILE';
 export const SET_SHOW_MODAL = 'SET_SHOW_MODAL';
 export const SET_CHECKED = 'SET_CHECKED';
 export const SET_VALUE = 'SET_VALUE';
+export const SET_USER_DOB = 'SET_USER_DOB';
+export const SET_USER_ADDRESS = 'SET_USER_ADDRESS';
+export const SET_USER_PHONE = 'SET_USER_PHONE';
 
 
 export const setuserId = userid => dispatch => {
@@ -80,5 +83,23 @@ export const setValue = value => dispatch => {
   dispatch({
     type: SET_VALUE,
     payload: value,  
+  });
+};
+export const setuserDOB = userdob => dispatch => {
+  dispatch({
+    type: SET_USER_DOB,
+    payload: userdob,  
+  });
+};
+export const setuserAddress = useraddress => dispatch => {
+  dispatch({
+    type: SET_USER_ADDRESS,
+    payload: useraddress,
+  });
+};
+export const setuserPhone = userphone => dispatch => {
+  dispatch({
+    type: SET_USER_PHONE,
+    payload: userphone,
   });
 };
