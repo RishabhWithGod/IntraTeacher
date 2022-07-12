@@ -103,7 +103,7 @@ const CreateEvent = () => {
   // --------APICall----------
 
   const Create = async () => {
-    setRefreshing(false);
+    // setRefreshing(false);
     setLoading(true);
     try {
       const formData = new FormData();
@@ -139,10 +139,10 @@ const CreateEvent = () => {
       setLoading(false);
     }
   };
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    getapiData();
-  }, []);
+  // const onRefresh = React.useCallback(() => {
+  //   setRefreshing(true);
+    
+  // }, []);
 
    // ---------------Image Picker-------------------
   // ----------To Select from gallery-------------------
@@ -162,9 +162,10 @@ const CreateEvent = () => {
       {loading == true && <Spinner visible={load} />}
       <ScrollView
         showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
+        // refreshControl={
+        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        // }
+        >
         <View style={{marginTop: 20}}>
           {/* <StreamDropDown /> */}
           <Text style={styles.formtxt}>Event Title:</Text>
