@@ -15,6 +15,7 @@ import {createFilter} from 'react-native-search-filter';
 import {useSelector, useDispatch} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {COLORS} from '../../theme/Colors';
+import Url from '../../Api/Url';
 
 const HistoryAttendance = props => {
   const {
@@ -70,7 +71,7 @@ const HistoryAttendance = props => {
       formData.append('academic_year_id', '5');
       formData.append('month', '07');
       let resp = await fetch(
-        'http://b038-45-250-44-37.ngrok.io/SchoolManagement/myapi/student_history',
+        `${Url.student_history}`,
         {
           method: 'POST',
           headers: {

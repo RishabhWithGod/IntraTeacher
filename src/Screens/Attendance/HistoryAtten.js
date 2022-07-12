@@ -49,7 +49,7 @@ const HistoryAtten = props => {
   }, []);
 
   // --------Date-time Picker----------
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [text, setText] = useState('');
@@ -83,7 +83,7 @@ const HistoryAtten = props => {
   };
 
   // --------Date-time Picker----------
-  const [dates, setDates] = useState(new Date(1598051730000));
+  const [dates, setDates] = useState(new Date());
   const [modes, setModes] = useState('date');
   const [shows, setShows] = useState(false);
   const [texts, setTexts] = useState('');

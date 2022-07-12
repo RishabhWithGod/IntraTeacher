@@ -10,13 +10,16 @@ import {
   setuserId,
   setuserInfo,
   setuserEmail,
-  setValue
+  setValue,
 } from '../../Redux/Actions/actions';
+import {Dropdown} from 'react-native-element-dropdown';
 const StreamDropDown = () => {
   const dispatch = useDispatch();
   DropDownPicker.setListMode('SCROLLVIEW');
   const [open, setOpen] = useState(false);
   const [valus11, setValue11] = useState(null);
+  const [classvalue, setClassValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
   // dispatch(setValue(valus11));
   // const [items, setItems] = useState([
   //   {label: 'FY', value: 'Faculty Name'},
@@ -27,11 +30,8 @@ const StreamDropDown = () => {
   // const dataValue = useSelector((state)=>state.userReducer,)
   // console.log("redux data:::",dataValue);
 
-  const {userinfo, userid, username, showmodal, schoolid,teacherid} = useSelector(
-   
-    state => state.userReducer,
-  );
-
+  const {userinfo, userid, username, showmodal, schoolid, teacherid, value} =
+    useSelector(state => state.userReducer);
 
   // console.log("ggkjgkf:::",value);
   // dispatch({
@@ -80,11 +80,41 @@ const StreamDropDown = () => {
       // setLoading(false);
     }
   };
-  
 
   return (
     <View>
       <Text style={styles.labeltxt}>Stream</Text>
+      {/* <Dropdown
+        style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        data={getdata.map(item => ({
+          label: item.class_name,
+          value: item.class_id,
+        }))}
+        search
+        containerStyle={{
+          backgroundColor: '#E5E5E5',
+          borderColor: '#E5E5E5',
+        }}
+        fontFamily={'Montserrat-Regular'}
+        maxHeight={300}
+        labelField="label"
+        valueField="value"
+        placeholder={!isFocus ? 'Select item' : '...'}
+        searchPlaceholder="Search..."
+        value={value}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)}
+        onChange={item => {
+          dispatch(setValue(item.value));
+          // setClass_Name(item.label);
+          setIsFocus(false);
+          // getsectionData(item);
+        }}
+      /> */}
       <DropDownPicker
         open={open}
         value={valus11}
