@@ -95,13 +95,14 @@ const Collection = props => {
               marginTop: 20,
               borderRadius: 5,
               justifyContent: 'space-between',
+              paddingHorizontal: 10,
             }}
             onPress={() => {
               props.navigation.navigate('CollectionDetail', {
                 name: book.name,
                 stream: book.stream,
                 date: book.date,
-                bookname: book.bookname, 
+                bookname: book.bookname,
                 rdate: book.rdate,
               });
             }}>

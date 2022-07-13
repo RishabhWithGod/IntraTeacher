@@ -29,7 +29,7 @@ const CreateEvent = () => {
     useSelector(state => state.userReducer);
   const [title, setTitle] = useState('');
   const [eventdesc, setEventdesc] = useState('');
-  const[image,setImage] = useState('');
+  const[image,setImage] = useState([]);
 
   // --------Date-time Picker----------
   const [date, setDate] = useState(new Date());

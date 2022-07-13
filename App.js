@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Avatar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
@@ -131,6 +132,7 @@ import Url from './src/Api/Url';
 import LeaveRequest from './src/Screens/Leave/LeaveRequest';
 import Settings from './src/Screens/Settings/Settings';
 import TeachersProfile from './src/Screens/TeachersProfile/TeachersProfile';
+import AddImage from './src/Screens/Gallery/AddImage';
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -1432,6 +1434,29 @@ const HomeStackScreen = ({navigation}) => {
             backgroundColor: 'black',
           },
           headerTintColor: 'white',
+          headerRight: () => (
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                style={{marginTop: 5}}
+                onPress={() => {
+                  navigation.navigate('AddImage');
+                }}>
+                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
+      />
+      <HomeStack.Screen
+        name="AddImage"
+        component={AddImage}
+        options={{
+          title: 'New Post',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
         }}
       />
       <HomeStack.Screen
@@ -1459,7 +1484,7 @@ const HomeStackScreen = ({navigation}) => {
           headerTintColor: 'white',
         }}
       />
-       <HomeStack.Screen
+      <HomeStack.Screen
         name="Settings"
         component={Settings}
         options={{
@@ -1471,7 +1496,7 @@ const HomeStackScreen = ({navigation}) => {
           headerTintColor: 'white',
         }}
       />
-       <HomeStack.Screen
+      <HomeStack.Screen
         name="TeachersProfile"
         component={TeachersProfile}
         options={{

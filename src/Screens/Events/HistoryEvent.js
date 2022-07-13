@@ -100,6 +100,7 @@ const HistoryEvent = props => {
               marginTop: 20,
               borderRadius: 5,
               justifyContent: 'space-between',
+              paddingHorizontal:10
             }}
             onPress={() => {
               console.log('data=' + JSON.stringify(events[index]));

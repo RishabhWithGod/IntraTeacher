@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {
   useTheme,
   Avatar,
@@ -34,15 +34,20 @@ export function DrawerContent(props) {
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
             <View style={{flexDirection: 'row', marginTop: 15}}>
-              <Avatar.Image
-                source={{uri: Url.profile_IMG + userimage}}
-                size={50}
-                // style={{backgroundColor:"#000000"}}
-              />
-              <View style={{marginLeft: 15, flexDirection: 'column'}}>
-                <Title style={styles.title}>Hello! {username}</Title>
-                <Caption style={styles.caption}>{useremail}</Caption>
-              </View>
+              <TouchableOpacity
+                style={{flexDirection: 'row'}}
+                onPress={() => {
+                  props.navigation.navigate('TeachersProfile');
+                }}>
+                <Avatar.Image
+                  source={{uri: Url.profile_IMG + userimage}}
+                  size={50}
+                />
+                <View style={{marginLeft: 15, flexDirection: 'column'}}>
+                  <Title style={styles.title}>Hello! {username}</Title>
+                  <Caption style={styles.caption}>{useremail}</Caption>
+                </View>
+              </TouchableOpacity>
               <View>
                 <Entypo.Button
                   name="cross"

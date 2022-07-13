@@ -109,7 +109,7 @@ const SignIn = props => {
         })
         .catch(err => {
           console.log('Error Reading data' + err);
-          alert(err);
+          alert('Server Error');
           setLoading(false);
         });
     }

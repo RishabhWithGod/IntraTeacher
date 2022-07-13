@@ -34,6 +34,7 @@
     "react-native-document-picker": "^7.1.1",
     "react-native-dropdown-picker": "^5.2.3",
     "react-native-element-dropdown": "^2.0.0",
+    "react-native-full-image-picker": "^1.2.11",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-image-crop-picker": "^0.37.3",
     "react-native-image-picker": "^4.8.4",
