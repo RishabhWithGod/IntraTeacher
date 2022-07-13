@@ -6,9 +6,11 @@ import {
   TextInput,
   ScrollView,
   Image,
+  ImageBackground,
 } from 'react-native';
 import {container, paraGray} from '../../theme/styles/Base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {COLORS} from '../../theme/Colors';
 import {Avatar} from 'react-native-paper';
 import {useSelector} from 'react-redux';
@@ -90,7 +92,7 @@ const AddImage = () => {
             }}
             onPress={SelectImage}>
             <Text style={[paraGray.darklarge, {marginRight: 5}]}>
-              ADD Image
+             Add Image
             </Text>
             <AntDesign
               style={{marginVertical: 5}}
@@ -114,11 +116,25 @@ const AddImage = () => {
             marginTop: 10,
             paddingHorizontal: 15,
           }}>
-          <Avatar.Image
-            style={{marginTop: 6}}
-            size={40}
-            source={{uri: Url.profile_IMG + userimage}}
-          />
+          {userimage == '' ? (
+            <ImageBackground
+              style={{
+                backgroundColor: COLORS.black,
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+              }}>
+              <FontAwesome5 name="user-alt" size={20} color="#FFFFFF" />
+            </ImageBackground>
+          ) : (
+            <Avatar.Image
+              style={{marginTop: 6}}
+              size={40}
+              source={{uri: Url.profile_IMG + userimage}}
+            />
+          )}
           <TextInput
             placeholder="Write Title"
             style={[
