@@ -92,7 +92,7 @@ const AddImage = () => {
             }}
             onPress={SelectImage}>
             <Text style={[paraGray.darklarge, {marginRight: 5}]}>
-             Add Image
+              Add Image
             </Text>
             <AntDesign
               style={{marginVertical: 5}}
