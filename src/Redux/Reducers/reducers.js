@@ -58,10 +58,10 @@ function userReducer(state = initialState, action) {
       return {...state, value: action.payload};
     case SET_USER_DOB:
       return {...state, userdob: action.payload};
-      case SET_USER_ADDRESS:
-        return {...state, useraddress: action.payload};
-        case SET_USER_PHONE:
-          return {...state, userphone: action.payload};
+    case SET_USER_ADDRESS:
+      return {...state, useraddress: action.payload};
+    case SET_USER_PHONE:
+      return {...state, userphone: action.payload};
     default:
       return state;
   }

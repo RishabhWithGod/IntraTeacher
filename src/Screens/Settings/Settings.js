@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Linking,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {COLORS} from '../../theme/Colors';
@@ -44,10 +45,9 @@ const Settings = props => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-        //   onPress={() => {
-        //     props.navigation.navigate('');
-        //   }}
-        >
+          onPress={() => {
+            props.navigation.navigate('ChangePassword');
+          }}>
           <View style={styles.arrow}>
             <Text style={styles.headerText}>Change password</Text>
             <FontAwesome name="angle-right" size={25} color="#000000" />
@@ -64,10 +64,9 @@ const Settings = props => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-        //   onPress={() => {
-        //     props.navigation.navigate('');
-        //   }}
-        >
+          onPress={() => {
+            props.navigation.navigate('Security');
+          }}>
           <View style={styles.arrow}>
             <Text style={styles.headerText}>Security</Text>
             <FontAwesome name="angle-right" size={25} color="#000000" />
@@ -82,30 +81,27 @@ const Settings = props => {
           More
         </Text>
         <TouchableOpacity
-        //   onPress={() => {
-        //     props.navigation.navigate('');
-        //   }}
-        >
+          onPress={() => {
+            Linking.openURL('https://intraedu.in/about');
+          }}>
           <View style={styles.arrow}>
             <Text style={styles.headerText}>About us</Text>
             <FontAwesome name="angle-right" size={25} color="#000000" />
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-        //   onPress={() => {
-        //     props.navigation.navigate('');
-        //   }}
-        >
+          onPress={() => {
+            Linking.openURL('https://intraedu.in/privacyandpolicy');
+          }}>
           <View style={styles.arrow}>
             <Text style={styles.headerText}>Privacy policy</Text>
             <FontAwesome name="angle-right" size={25} color="#000000" />
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-        //   onPress={() => {
-        //     props.navigation.navigate('');
-        //   }}
-        >
+          onPress={() => {
+            Linking.openURL('https://intraedu.in/termsandservice');
+          }}>
           <View style={styles.arrow}>
             <Text style={styles.headerText}>Terms and conditions</Text>
             <FontAwesome name="angle-right" size={25} color="#000000" />
