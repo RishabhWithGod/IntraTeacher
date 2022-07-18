@@ -60,10 +60,10 @@ const MPINSet = props => {
             <AntDesign name="checkcircle" size={90} color={COLORS.active} />
           </View>
           <View style={{alignItems: 'center'}}>
-            <Text style={[paraGray.parahome]}>PIN Reset Successful</Text>
+            <Text style={[paraGray.parahome]}>PIN set Successful</Text>
           </View>
           <Text style={[paraGray.darkpara, {textAlign: 'center'}]}>
-            You have successfully reset your PIN. please use your new password
+            You have successfully set your PIN. please use your new pin
             when logging in.
           </Text>
           <View style={{paddingHorizontal: 20}}>
