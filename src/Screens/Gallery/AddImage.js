@@ -51,7 +51,9 @@ const AddImage = () => {
       })
       .catch(e => console.log('galleryerror => ', e.message));
   };
-
+  const removeItem = index => {
+    setImage(image.filter((o, i) => index !== i));
+  };
   return (
     <View style={[container.container]}>
       <ScrollView>
@@ -69,13 +71,22 @@ const AddImage = () => {
               flexWrap: 'wrap',
               marginBottom: 20,
             }}>
-            {image.map(image => (
-              <View style={{marginHorizontal: 10, marginVertical: 10}}>
+            {image.map((image, index) => (
+              <TouchableOpacity
+                key={index}
+                style={{marginHorizontal: 10, marginVertical: 10}}
+                onPress={() => removeItem(index)}>
+                <AntDesign
+                  style={{alignSelf: 'flex-end', marginRight: 5}}
+                  name="closecircleo"
+                  size={20}
+                  color={COLORS.black}
+                />
                 <Image
-                  style={{flexDirection: 'row', height: 50, width: 50}}
+                  style={{flexDirection: 'row', height: 150, width: 150}}
                   source={{uri: image.path}}
                 />
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
           <TouchableOpacity
@@ -91,9 +102,6 @@ const AddImage = () => {
               marginBottom: 10,
             }}
             onPress={SelectImage}>
-            <Text style={[paraGray.darklarge, {marginRight: 5}]}>
-              Add Image
-            </Text>
             <AntDesign
               style={{marginVertical: 5}}
               name="pluscircle"

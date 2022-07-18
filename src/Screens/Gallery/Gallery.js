@@ -64,7 +64,7 @@ const Gallery = props => {
           return response.json();
         })
         .then(result => {
-          console.log(result);
+          // console.log(result);
           setdata(result.data);
           // console.log('hi' + result.data);
           setLoading(false);
