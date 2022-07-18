@@ -124,7 +124,7 @@ const MPINVerification = props => {
               paraGray.darkpara,
               {color: COLORS.lightblack, textAlign: 'center'},
             ]}>
-            Enter the verfication code we just sent you on your E-mail address.
+            Enter Your MPIN.
           </Text>
         </View>
         <View
@@ -182,14 +182,14 @@ const MPINVerification = props => {
                 />
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{flex: 1, marginBottom: 20}}
               onPress={() => props.navigation.navigate('ForgetPIN')}>
               <Text
                 style={[paraGray.darkpara, {textDecorationLine: 'underline'}]}>
                 Forget MPIN?
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </ScrollView>
