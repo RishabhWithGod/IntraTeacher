@@ -61,7 +61,7 @@ const Splash = props => {
       <StatusBar backgroundColor={COLORS.bg} barStyle={'dark-content'} />
       <ImageBackground
         style={{flex: 1}}
-        source={require('../../../assets/splashBackground.jpg')}>
+        source={require('../../../assets/splash.png')}>
         <TouchableOpacity
           onPress={StoreData}
           activeOpacity={1}
@@ -69,16 +69,9 @@ const Splash = props => {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-          }}>
-          <View>
-            <Image
-              style={{height: 200, width: 260}}
-              source={require('../../../assets/Black_Blue_Logo.png')}
-            />
-          </View>
-        </TouchableOpacity>
+          }}></TouchableOpacity>
         <View style={{alignSelf: 'center', marginBottom: 40}}>
-          <Text style={[paraGray.whitepara]}>Made in India</Text>
+          <Text style={[paraGray.darklarge]}>Made in India</Text>
         </View>
       </ImageBackground>
     </View>
