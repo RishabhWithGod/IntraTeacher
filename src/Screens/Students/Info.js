@@ -22,7 +22,7 @@ import {paraGray} from '../../theme/styles/Base';
 import {COLORS} from '../../theme/Colors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-crop-picker';
-
+import {MultiSelect} from 'react-native-element-dropdown';
 const Info = () => {
   const [student, setStudent] = useState({
     image: '',
@@ -37,7 +37,7 @@ const Info = () => {
     motheremail: '',
     Address: '',
   });
-
+  const [selected, setSelected] = useState([]);
   //   -----------------DropDownPicker------------
   DropDownPicker.setListMode('SCROLLVIEW');
   const [open, setOpen] = useState(false);
@@ -471,27 +471,25 @@ const Info = () => {
           }}
         /> */}
           <Text style={styles.formtxt}>Select Subjects:</Text>
-          <DropDownPicker
-            open={opened}
-            value={valued}
-            items={Subitems}
-            setOpen={setOpened}
-            setValue={setValued}
-            setItems={setSubItems}
-            style={styles.txtbox}
-            placeholder="Choose Subjects"
-            // dropDownDirection="Bottom"
-            dropDownContainerStyle={{
-              width: '90%',
-              alignSelf: 'center',
-              borderColor: '#C4C4C4',
-            }}
-            textStyle={{
-              fontSize: 13,
-              color: '#000000',
-              fontFamily: 'Montserrat-Regular',
-            }}
-          />
+          <View style={{paddingHorizontal: 20, marginTop: 20}}>
+            <MultiSelect
+              style={styles.dropdown}
+              placeholderStyle={styles.placeholderStyle}
+              selectedTextStyle={styles.selectedTextStyle}
+              inputSearchStyle={styles.inputSearchStyle}
+              iconStyle={styles.iconStyle}
+              search
+              data={Busitem}
+              labelField="label"
+              valueField="value"
+              placeholder="Select item"
+              searchPlaceholder="Search..."
+              value={selected}
+              onChange={item => {
+                setSelected(item);
+              }}
+            />
+          </View>
           <View
             style={{
               flex: 1,
@@ -591,5 +589,29 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Montserrat-Regular',
     color: '#000000',
+  },
+  dropdown: {
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+    fontFamily: 'Montserrat-Regular',
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+    fontFamily: 'Montserrat-Regular',
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
+    fontFamily: 'Montserrat-Regular',
   },
 });

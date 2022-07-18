@@ -24,10 +24,9 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {Dropdown} from 'react-native-element-dropdown';
 
 const AttendancePtm = props => {
-  DropDownPicker.setListMode('SCROLLVIEW');
+  // DropDownPicker.setListMode('SCROLLVIEW');
   const [classvalue, setClassValue] = useState(null);
   const [sectionvalue, setSectionValue] = useState(null);
-  const [value, setValue] = useState(null);
   const [subjectvalue, setSubjectValue] = useState(null);
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(true);
@@ -40,13 +39,13 @@ const AttendancePtm = props => {
   const [isFocus, setIsFocus] = useState(false);
   const [issectionFocus, setIssectionFocus] = useState(false);
   const [issubjectFocus, setIssubjectFocus] = useState(false);
-
+  
   useEffect(() => {
     getapiData();
 
     // console.log(date);
-    console.log("Tid"+teacherid)
-    console.log('Uid' + userid);
+    // console.log("Tid"+teacherid)
+    // console.log('Uid' + userid);
   }, []);
 
   // --------APICall----------
@@ -85,7 +84,7 @@ const AttendancePtm = props => {
   const getsectionData = async item => {
     // setValue(item);
 
-    // console.log('first' + JSON.stringify(value));
+    // console.log('first' + JSON.stringify(classvalue));
     // getsectionData();
     // setRefreshing(false);
     // setLoading(true);
@@ -181,7 +180,7 @@ const AttendancePtm = props => {
             fontFamily={'Montserrat-Regular'}
             maxHeight={300}
             labelField="label"
-            valueField={getdata== ''?"fdd":"value"}
+            valueField="value"
             placeholder={!isFocus ? 'Select item' : '...'}
             searchPlaceholder="Search..."
             value={classvalue}
@@ -288,7 +287,6 @@ const AttendancePtm = props => {
               onPress={() => {
                 // setLoading(true);
                 props.navigation.navigate('TakeAttendance', {
-                  streamvalue: value,
                   classvalue: classvalue,
                   sectionvalue: sectionvalue,
                   subjectvalue: subjectvalue,
@@ -319,10 +317,10 @@ const styles = StyleSheet.create({
   },
   labeltxt: {
     color: '#000000',
-    // marginLeft: 15,
+    // marginLeft: 10,
+    marginBottom:10,
     marginTop: 20,
-    marginBottom: 10,
-    fontSize: 14,
+    fontSize: 15,
     fontFamily: 'Montserrat-Regular',
   },
   dropdown: {

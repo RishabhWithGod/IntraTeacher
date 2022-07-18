@@ -20,10 +20,16 @@ import {useSelector, useDispatch} from 'react-redux';
 import Url from '../../Api/Url';
 
 const TeachersProfile = props => {
-  // const {student} = props.route.params;
-  const {userinfo, userid, username, userimage, useremail,userdob,userphone,useraddress} = useSelector(
-    state => state.userReducer,
-  );
+  const {
+    userinfo,
+    userid,
+    username,
+    userimage,
+    useremail,
+    userdob,
+    userphone,
+    useraddress,
+  } = useSelector(state => state.userReducer);
   // useEffect(() => {
   //    console.log("us"+JSON.stringify(userdob))
   //    console.log("us"+JSON.stringify(useraddress))

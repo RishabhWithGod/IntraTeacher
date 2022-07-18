@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Avatar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
@@ -131,6 +132,15 @@ import Url from './src/Api/Url';
 import LeaveRequest from './src/Screens/Leave/LeaveRequest';
 import Settings from './src/Screens/Settings/Settings';
 import TeachersProfile from './src/Screens/TeachersProfile/TeachersProfile';
+import AddImage from './src/Screens/Gallery/AddImage';
+import ChangePassword from './src/Screens/Login/ChangePassword';
+import Security from './src/Screens/Security/Security';
+import CreateMPIN from './src/Screens/Security/MPIN/CreateMPIN';
+import ChangeMPIN from './src/Screens/Security/MPIN/ChangeMPIN';
+import MPINSet from './src/Screens/Security/MPIN/MPINSet';
+import MPINVerification from './src/Screens/Security/MPIN/MPINVerification';
+import ForgetPIN from './src/Screens/Security/MPIN/ForgetPIN';
+import ForgetMPIN from './src/Screens/Security/MPIN/ForgetMPIN';
 const HomeStack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -221,7 +231,10 @@ const HomeStackScreen = ({navigation}) => {
         component={ForgetPassword}
         options={{
           animationEnabled: false,
-          // headerShown: false,
+         headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
         }}
       />
       <HomeStack.Screen
@@ -230,7 +243,10 @@ const HomeStackScreen = ({navigation}) => {
         options={{
           title: 'Forget Password',
           animationEnabled: false,
-          // headerShown: false,
+         headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
         }}
       />
       <HomeStack.Screen
@@ -239,7 +255,20 @@ const HomeStackScreen = ({navigation}) => {
         options={{
           title: 'Forget Password',
           animationEnabled: false,
-          // headerShown: false,
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ChangePassword"
+        component={ChangePassword}
+        options={{
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
         }}
       />
       <HomeStack.Screen
@@ -1432,6 +1461,29 @@ const HomeStackScreen = ({navigation}) => {
             backgroundColor: 'black',
           },
           headerTintColor: 'white',
+          headerRight: () => (
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                style={{marginTop: 5}}
+                onPress={() => {
+                  navigation.navigate('AddImage');
+                }}>
+                <AntDesign name="pluscircle" size={25} color={COLORS.bg} />
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
+      />
+      <HomeStack.Screen
+        name="AddImage"
+        component={AddImage}
+        options={{
+          title: 'New Post',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
         }}
       />
       <HomeStack.Screen
@@ -1459,7 +1511,7 @@ const HomeStackScreen = ({navigation}) => {
           headerTintColor: 'white',
         }}
       />
-       <HomeStack.Screen
+      <HomeStack.Screen
         name="Settings"
         component={Settings}
         options={{
@@ -1471,12 +1523,96 @@ const HomeStackScreen = ({navigation}) => {
           headerTintColor: 'white',
         }}
       />
-       <HomeStack.Screen
+      <HomeStack.Screen
         name="TeachersProfile"
         component={TeachersProfile}
         options={{
           title: 'My Profile',
 
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+       <HomeStack.Screen
+        name="Security"
+        component={Security}
+        options={{
+          title: 'Security',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="CreateMPIN"
+        component={CreateMPIN}
+        options={{
+          title: 'Create MPIN',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+       <HomeStack.Screen
+        name="ChangeMPIN"
+        component={ChangeMPIN}
+        options={{
+          title: 'Change MPIN',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+       <HomeStack.Screen
+        name="MPINSet"
+        component={MPINSet}
+        options={{
+          title: 'MPIN',
+          headerShown:false,
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+       <HomeStack.Screen
+        name="MPINVerification"
+        component={MPINVerification}
+        options={{
+          title: 'MPIN',
+          headerShown:false,
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ForgetPIN"
+        component={ForgetPIN}
+        options={{
+          title: 'Forget MPIN',
+          headerShown:false,
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+        }}
+      />
+      <HomeStack.Screen
+        name="ForgetMPIN"
+        component={ForgetMPIN}
+        options={{
+          title: 'Forget MPIN',
+          headerShown:false,
           headerStyle: {
             backgroundColor: 'black',
           },

@@ -25,6 +25,7 @@ const Splash = props => {
       const onboarddata = await AsyncStorage.getItem('onboard');
       const user_Id = await AsyncStorage.getItem('user_id');
       const user_name = await AsyncStorage.getItem('name');
+      const Toggle = await AsyncStorage.getItem('toggle');
       // const onboard = await AsyncStorage.getItem('onboard');
       // setOnboarding(onboard);
       setUserLogin(user_Id);
@@ -32,8 +33,12 @@ const Splash = props => {
       dispatch(setuserName(user_name));
       // console.log('hell' + onboarding);
 
-      if (user_Id !== null) {
-        props.navigation.navigate('Home');
+      if (user_Id != null) {
+        if (Toggle != null) {
+          props.navigation.navigate('MPINVerification');
+        } else {
+          props.navigation.navigate('Home');
+        }
       } else if (onboarddata == null) {
         AsyncStorage.setItem('onboard', 'false');
         props.navigation.navigate('OnBoarding');

@@ -214,7 +214,7 @@ const LeaveRequest = () => {
         onDismiss={() => dispatch(setShowModal(false))}
         contentContainerStyle={{
           width: '75%',
-          height: 250,
+          height: 350,
           backgroundColor: COLORS.bg,
           alignSelf: 'center',
           padding: 15,

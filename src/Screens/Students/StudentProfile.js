@@ -39,7 +39,7 @@ const StudentProfile = props => {
         }}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Text
-            style={[paraGray.darklarge, {textAlign: 'center', marginLeft: 30}]}>
+            style={[paraGray.darkpara, {textAlign: 'center', marginLeft: 30}]}>
             INFO
           </Text>
         </View>
@@ -151,16 +151,18 @@ const StudentProfile = props => {
                 <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
                   Aadhar No
                 </Text>
-                <TextInput
-                  value="1234 4325 4567"
+                <Text
                   style={[
-                    paraGray.darklarge,
+                    paraGray.darkpara,
                     {
                       borderBottomColor: COLORS.bottom,
                       borderBottomWidth: 1,
+                      width: '80%',
+                      marginTop: 10,
                     },
-                  ]}
-                />
+                  ]}>
+                  1234 4325 4567
+                </Text>
               </View>
               <View
                 style={{
@@ -176,7 +178,7 @@ const StudentProfile = props => {
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <Text
                     style={[
-                      paraGray.darklarge,
+                      paraGray.darkpara,
                       {
                         borderBottomColor: COLORS.bottom,
                         borderBottomWidth: 1,
@@ -220,7 +222,7 @@ const StudentProfile = props => {
                   style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                   <Text
                     style={[
-                      paraGray.darklarge,
+                      paraGray.darkpara,
                       {
                         borderBottomColor: COLORS.bottom,
                         borderBottomWidth: 1,
@@ -255,7 +257,7 @@ const StudentProfile = props => {
                   style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                   <Text
                     style={[
-                      paraGray.darklarge,
+                      paraGray.darkpara,
                       {
                         borderBottomColor: COLORS.bottom,
                         borderBottomWidth: 1,
@@ -298,7 +300,7 @@ const StudentProfile = props => {
                   style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                   <Text
                     style={[
-                      paraGray.darklarge,
+                      paraGray.darkpara,
                       {
                         borderBottomColor: COLORS.bottom,
                         borderBottomWidth: 1,
@@ -332,7 +334,7 @@ const StudentProfile = props => {
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <Text
                     style={[
-                      paraGray.darklarge,
+                      paraGray.darkpara,
                       {
                         borderBottomColor: COLORS.bottom,
                         borderBottomWidth: 1,
@@ -355,78 +357,67 @@ const StudentProfile = props => {
             </View>
             <View
               style={{
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexDirection: 'row',
                 width: '100%',
+                heigth: 150,
+                backgroundColor: 'white',
                 marginBottom: 10,
               }}>
-              <View
-                style={{
-                  width: '45%',
-                  heigth: 150,
-                  backgroundColor: 'white',
-                  // paddingHorizontal: 10,
-                }}>
-                <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
-                  Student Mobile NO
+              <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
+                Student Mobile NO
+              </Text>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+                <Text
+                  style={[
+                    paraGray.darkpara,
+                    {
+                      borderBottomColor: COLORS.bottom,
+                      borderBottomWidth: 1,
+                      width: '90%',
+                    },
+                  ]}>
+                  {student.phone}
                 </Text>
                 <View
-                  style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-                  <Text
-                    style={[
-                      paraGray.darklarge,
-                      {
-                        borderBottomColor: COLORS.bottom,
-                        borderBottomWidth: 1,
-                        width: '80%',
-                      },
-                    ]}>
-                    {student.phone}
-                  </Text>
-                  <View
-                    style={{
-                      flex: 1,
-                      position: 'relative',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <Entypo name="lock" size={15} color={COLORS.label} />
-                  </View>
+                  style={{
+                    flex: 1,
+                    position: 'relative',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Entypo name="lock" size={15} color={COLORS.label} />
                 </View>
               </View>
-              <View
-                style={{
-                  width: '50%',
-                  heigth: 150,
-                  backgroundColor: 'white',
-                  // paddingHorizontal: 10,
-                  marginLeft: 10,
-                }}>
-                <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
-                  Student E-mail ID
+            </View>
+            <View
+              style={{
+                width: '100%',
+                heigth: 150,
+                backgroundColor: 'white',
+                marginBottom: 10,
+              }}>
+              <Text style={[paraGray.darkpara, {color: COLORS.label}]}>
+                Student E-mail ID
+              </Text>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+                <Text
+                  style={[
+                    paraGray.darkpara,
+                    {
+                      borderBottomColor: COLORS.bottom,
+                      borderBottomWidth: 1,
+                      width: '90%',
+                    },
+                  ]}>
+                  {student.email}
                 </Text>
-                <View style={{flex: 1, flexDirection: 'row'}}>
-                  <Text
-                    style={[
-                      paraGray.darklarge,
-                      {
-                        borderBottomColor: COLORS.bottom,
-                        borderBottomWidth: 1,
-                        width: '80%',
-                      },
-                    ]}>
-                    {student.email}
-                  </Text>
-                  <View
-                    style={{
-                      flex: 1,
-                      position: 'relative',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <Entypo name="lock" size={15} color={COLORS.label} />
-                  </View>
+                <View
+                  style={{
+                    flex: 1,
+                    position: 'relative',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Entypo name="lock" size={15} color={COLORS.label} />
                 </View>
               </View>
             </View>
@@ -451,7 +442,7 @@ const StudentProfile = props => {
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <Text
                     style={[
-                      paraGray.darklarge,
+                      paraGray.darkpara,
                       {
                         borderBottomColor: COLORS.bottom,
                         borderBottomWidth: 1,
@@ -485,7 +476,7 @@ const StudentProfile = props => {
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <Text
                     style={[
-                      paraGray.darklarge,
+                      paraGray.darkpara,
                       {
                         borderBottomColor: COLORS.bottom,
                         borderBottomWidth: 1,
@@ -527,7 +518,7 @@ const StudentProfile = props => {
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <Text
                     style={[
-                      paraGray.darklarge,
+                      paraGray.darkpara,
                       {
                         borderBottomColor: COLORS.bottom,
                         borderBottomWidth: 1,
@@ -561,7 +552,7 @@ const StudentProfile = props => {
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <Text
                     style={[
-                      paraGray.darklarge,
+                      paraGray.darkpara,
                       {
                         borderBottomColor: COLORS.bottom,
                         borderBottomWidth: 1,
@@ -595,7 +586,7 @@ const StudentProfile = props => {
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <Text
                   style={[
-                    paraGray.darklarge,
+                    paraGray.darkpara,
                     {
                       borderBottomColor: COLORS.bottom,
                       borderBottomWidth: 1,
@@ -628,7 +619,7 @@ const StudentProfile = props => {
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <Text
                   style={[
-                    paraGray.darklarge,
+                    paraGray.darkpara,
                     {
                       borderBottomColor: COLORS.bottom,
                       borderBottomWidth: 1,
@@ -661,7 +652,7 @@ const StudentProfile = props => {
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <Text
                   style={[
-                    paraGray.darklarge,
+                    paraGray.darkpara,
                     {
                       borderBottomColor: COLORS.bottom,
                       borderBottomWidth: 1,
@@ -696,7 +687,7 @@ const StudentProfile = props => {
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <Text
                   style={[
-                    paraGray.darklarge,
+                    paraGray.darkpara,
                     {
                       borderBottomColor: COLORS.bottom,
                       borderBottomWidth: 1,
@@ -731,7 +722,7 @@ const StudentProfile = props => {
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <Text
                   style={[
-                    paraGray.darklarge,
+                    paraGray.darkpara,
                     {
                       borderBottomColor: COLORS.bottom,
                       borderBottomWidth: 1,

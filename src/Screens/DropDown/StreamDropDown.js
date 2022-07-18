@@ -10,22 +10,35 @@ import {
   setuserId,
   setuserInfo,
   setuserEmail,
-  setValue
+  setValue,
 } from '../../Redux/Actions/actions';
+import {Dropdown} from 'react-native-element-dropdown';
 const StreamDropDown = () => {
   const dispatch = useDispatch();
   DropDownPicker.setListMode('SCROLLVIEW');
   const [open, setOpen] = useState(false);
-  // const [value, setValue] = useState(null);
+  const [valus11, setValue11] = useState(null);
+  const [classvalue, setClassValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
+  // dispatch(setValue(valus11));
   // const [items, setItems] = useState([
   //   {label: 'FY', value: 'Faculty Name'},
   //   {label: 'SY', value: 'Name'},
   //   {label: 'TY', value: 'Names'},
   // ]);
 
-  const {userinfo, userid, username, showmodal, schoolid,value} = useSelector(
-    state => state.userReducer,
-  );
+  // const dataValue = useSelector((state)=>state.userReducer,)
+  // console.log("redux data:::",dataValue);
+
+  const {userinfo, userid, username, showmodal, schoolid, teacherid, value} =
+    useSelector(state => state.userReducer);
+
+  // console.log("ggkjgkf:::",value);
+  // dispatch({
+  //   type:"SET_VALUE",
+  //   payload:value
+  // });
+
   const [getdata, setGetdata] = useState([]);
 
   useEffect(() => {
@@ -41,9 +54,10 @@ const StreamDropDown = () => {
     // setLoading(true);
     try {
       const formData = new FormData();
-      // formData.append('school_id', schoolid);
-      formData.append('teacher_id', userid);
-      let resp = await fetch(`${Url.getclass}`, {
+      formData.append('user_id', userid);
+      formData.append('teacher_id', teacherid);
+
+      let resp = await fetch(`${Url.get_all_class}`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -58,24 +72,55 @@ const StreamDropDown = () => {
         .then(result => {
           console.log(result);
           setGetdata(result.data);
+          // console.log('hi' + result.data);
           // setLoading(false);
         });
     } catch (error) {
-      console.log('DropStream Error => ' + error);
+      console.log('AttendancePtm Error => ' + error);
       // setLoading(false);
     }
   };
-  
 
   return (
     <View>
       <Text style={styles.labeltxt}>Stream</Text>
+      {/* <Dropdown
+        style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        data={getdata.map(item => ({
+          label: item.class_name,
+          value: item.class_id,
+        }))}
+        search
+        containerStyle={{
+          backgroundColor: '#E5E5E5',
+          borderColor: '#E5E5E5',
+        }}
+        fontFamily={'Montserrat-Regular'}
+        maxHeight={300}
+        labelField="label"
+        valueField="value"
+        placeholder={!isFocus ? 'Select item' : '...'}
+        searchPlaceholder="Search..."
+        value={value}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)}
+        onChange={item => {
+          dispatch(setValue(item.value));
+          // setClass_Name(item.label);
+          setIsFocus(false);
+          // getsectionData(item);
+        }}
+      /> */}
       <DropDownPicker
         open={open}
-        value={value}
-        items={getdata.map(item => ({label: item.name, value: item.name}))}
+        value={valus11}
+        items={getdata.map(item => ({label: item.class_name, value: item.class_id}))}
         setOpen={setOpen}
-        setValue={setValue}
+        setValue={setValue11}
         // onChangeValue={({value}) => {
         //   (setValue(value),console.log(value))
         // }}
