@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, Image, StatusBar} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StatusBar,
+  ImageBackground,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {COLORS} from '../../theme/Colors';
 import {useSelector, useDispatch} from 'react-redux';
@@ -18,7 +25,7 @@ const Splash = props => {
     state => state.userReducer,
   );
   useEffect(() => {
-    StoreData();
+    // StoreData();
   }, []);
   const StoreData = async () => {
     try {
@@ -50,26 +57,30 @@ const Splash = props => {
     }
   };
   return (
-    <View style={{flex: 1, backgroundColor: COLORS.black}}>
-      <StatusBar backgroundColor={COLORS.black} barStyle={'light-content'} />
-      <TouchableOpacity
-        onPress={StoreData}
-        activeOpacity={1}
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <View>
-          <Image
-            style={{height: 115, width: 150}}
-            source={require('../../../assets/intraedu.png')}
-          />
+    <View style={{flex: 1}}>
+      <StatusBar backgroundColor={COLORS.bg} barStyle={'dark-content'} />
+      <ImageBackground
+        style={{flex: 1}}
+        source={require('../../../assets/splashBackground.jpg')}>
+        <TouchableOpacity
+          onPress={StoreData}
+          activeOpacity={1}
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View>
+            <Image
+              style={{height: 200, width: 260}}
+              source={require('../../../assets/Black_Blue_Logo.png')}
+            />
+          </View>
+        </TouchableOpacity>
+        <View style={{alignSelf: 'center', marginBottom: 40}}>
+          <Text style={[paraGray.whitepara]}>Made in India</Text>
         </View>
-      </TouchableOpacity>
-      <View style={{alignSelf: 'center', marginBottom: 40}}>
-        <Text style={[paraGray.whitepara]}>Made in India</Text>
-      </View>
+      </ImageBackground>
     </View>
   );
 };
