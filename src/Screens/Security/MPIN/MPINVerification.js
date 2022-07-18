@@ -24,6 +24,8 @@ import {COLORS} from '../../../theme/Colors';
 import {container, paraGray} from '../../../theme/styles/Base';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useSelector, useDispatch} from 'react-redux';
+import Url from '../../../Api/Url';
 
 const MPINVerification = props => {
   const CELL_COUNT = 4;
@@ -35,11 +37,13 @@ const MPINVerification = props => {
     value,
     setValue,
   });
+  const {userinfo, userid, username, showmodal, useremail, userimage} =
+    useSelector(state => state.userReducer);
 
   const [enableMask, setEnableMask] = useState(true);
 
   useEffect(() => {
-    setValue('')
+    setValue('');
   }, []);
 
   useFocusEffect(
@@ -106,7 +110,7 @@ const MPINVerification = props => {
   };
 
   return (
-    <View style={container.container}>
+    <View style={[container.container, {backgroundColor: COLORS.lightactive}]}>
       {loading == true && <Spinner visible={load} />}
       <ScrollView>
         <View style={{flex: 1, alignItems: 'center', marginTop: '25%'}}>
@@ -119,13 +123,10 @@ const MPINVerification = props => {
             marginTop: 20,
             paddingHorizontal: 10,
           }}>
-          <Text
-            style={[
-              paraGray.darkpara,
-              {color: COLORS.lightblack, textAlign: 'center'},
-            ]}>
-            Enter Your MPIN.
-          </Text>
+          <Avatar.Image
+            style={{marginTop: 10, alignSelf: 'center'}}
+            source={{uri: Url.profile_IMG + userimage}}
+          />
         </View>
         <View
           style={{
@@ -142,8 +143,17 @@ const MPINVerification = props => {
               borderRadius: 10,
               backgroundColor: COLORS.lightactive,
             }}>
-            <Text style={[paraGray.darkpara, {marginTop: 10}]}>Code</Text>
-            <View style={{flex: 1, flexDirection: 'row'}}>
+            <Text
+              style={[paraGray.darkpara, {textAlign: 'center', marginTop: 20}]}>
+              Enter Your MPIN.
+            </Text>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                marginTop: 20,
+              }}>
               <CodeField
                 autoFocus
                 ref={ref}
@@ -162,10 +172,10 @@ const MPINVerification = props => {
               style={{
                 flex: 1,
                 flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginBottom: 10,
+                justifyContent: 'center',
+                marginBottom: 20,
+                marginTop:10
               }}>
-              <Text style={[[paraGray.parahome]]}>Verify Code</Text>
               <TouchableOpacity
                 style={{
                   justifyContent: 'center',
@@ -174,12 +184,19 @@ const MPINVerification = props => {
                   borderRadius: 10,
                 }}
                 onPress={VerifyPIN}>
-                <AntDesign
+                <Text
+                  style={[
+                    paraGray.whitelarge,
+                    {marginVertical: 10, marginHorizontal: 20},
+                  ]}>
+                  Verify
+                </Text>
+                {/* <AntDesign
                   size={35}
                   name="arrowright"
                   color={COLORS.bg}
-                  style={{marginHorizontal: 20}}
-                />
+                  style={{marginHorizontal: 20, marginVertical: 10}}
+                /> */}
               </TouchableOpacity>
             </View>
             {/* <TouchableOpacity

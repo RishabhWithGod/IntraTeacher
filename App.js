@@ -275,7 +275,7 @@ const HomeStackScreen = ({navigation}) => {
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'INTRAedu',
+          title: 'INTRAEdu',
           headerLeft: () => (
             <View>
               <Icon.Button

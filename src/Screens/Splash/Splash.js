@@ -25,7 +25,9 @@ const Splash = props => {
     state => state.userReducer,
   );
   useEffect(() => {
-    StoreData();
+    setTimeout(() => {
+      StoreData();
+    }, 2000);
   }, []);
   const StoreData = async () => {
     try {
